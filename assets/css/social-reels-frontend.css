@@ -484,63 +484,58 @@
 
 .wpsr-reels-wrapper .wpsr-carousel-container button.wpsr-nav-arrow,
 .wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow {
-	position: absolute !important;
-	top: 50% !important;
-	transform: translateY(-50%) !important;
-	width: 44px !important;
-	height: 44px !important;
-	min-width: 44px !important;
-	min-height: 44px !important;
-	max-width: 44px !important;
-	max-height: 44px !important;
-	border-radius: 50% !important;
-	background: #ffffff !important;
-	color: #111827 !important;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: #ffffff;
+	color: #111827;
 	box-shadow: none !important; /* Zero default box shadow */
 	display: flex;
-	align-items: center !important;
-	justify-content: center !important;
-	cursor: pointer !important;
-	z-index: 35 !important;
-	transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease !important;
-	outline: none !important;
-	border: none !important;
-	padding: 0 !important;
-	margin: 0 !important;
-	box-sizing: border-box !important;
-	line-height: 1 !important;
-	text-decoration: none !important;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	z-index: 35;
+	transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+	outline: none;
+	border: none;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	line-height: 1;
+	text-decoration: none;
 }
 
 .wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow svg {
-	width: 20px !important;
-	height: 20px !important;
-	stroke: #111827 !important;
-	stroke-width: 2.5 !important;
-	fill: none !important;
-	display: block !important;
-	margin: 0 !important;
+	width: 20px;
+	height: 20px;
+	stroke: #111827;
+	stroke-width: 2.5;
+	fill: none;
+	display: block;
+	margin: 0;
 }
 
 .wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow i {
-	font-size: 16px !important;
-	color: #111827 !important;
-	line-height: 1 !important;
+	font-size: 16px;
+	color: #111827;
+	line-height: 1;
 }
 
 .wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow.wpsr-nav-prev {
-	left: 12px !important;
-	right: auto !important;
+	left: 12px;
+	right: auto;
 }
 
 .wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow.wpsr-nav-next {
-	right: 12px !important;
-	left: auto !important;
+	right: 12px;
+	left: auto;
 }
 
 .wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow:hover {
-	background: #ffffff !important;
-	transform: translateY(-50%) !important;
+	transform: translateY(-50%);
 }
 
 .wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow.swiper-button-disabled {

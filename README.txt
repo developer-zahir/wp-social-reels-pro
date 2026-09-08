@@ -4,7 +4,7 @@ Tags: elementor, reels, video, tiktok, instagram, shorts, video gallery, popup v
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.6.9
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,6 +15,7 @@ WP Social Reels Pro is a high-performance Elementor addon for showcasing vertica
 **WP Social Reels Pro** allows you to seamlessly integrate TikTok, Instagram Reels, and YouTube Shorts-style vertical video feeds into your Elementor pages.
 
 ### Key Features:
+* **Carousel Navigation Position Controllers**: Fine-grained responsive controls for Left Arrow Position, Right Arrow Position, Vertical Alignment (%), Box Size down to 10px, and Icon Size down to 6px.
 * **Global & Individual Post URLs**: Assign specific social post links to individual reel items which directly apply to the card social badge and the modal "View Post" button.
 * **Global Profile Settings**: Profile Image, Brand/Profile Name, and @Handle applied uniformly across all reel cards.
 * **Inline Video Playback**: Plays videos directly in place on cards when modal is disabled.
@@ -37,6 +38,10 @@ WP Social Reels Pro is a high-performance Elementor addon for showcasing vertica
 5. Customize items, layouts, and styles from the Elementor sidebar!
 
 == Changelog ==
+
+= 1.7.0 =
+* Feature: Added responsive horizontal and vertical positioning controls for carousel Left Arrow and Right Arrow buttons.
+* Fix: Removed minimum 24px slider barrier, allowing arrow button size down to 10px and icon size down to 6px.
 
 = 1.6.9 =
 * Feature: Added individual "Post / Social Link" control per reel item in the repeater.

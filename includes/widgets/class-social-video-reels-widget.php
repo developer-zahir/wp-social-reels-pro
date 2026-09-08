@@ -1842,8 +1842,8 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				'size_units' => [ 'px' ],
 				'range'      => [
 					'px' => [
-						'min' => 24,
-						'max' => 70,
+						'min' => 10,
+						'max' => 100,
 					],
 				],
 				'default'    => [
@@ -1851,7 +1851,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 					'size' => 44,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .wpsr-nav-arrow' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}}; min-width: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}}; max-width: {{SIZE}}{{UNIT}}; max-height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .wpsr-nav-arrow' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important; line-height: {{SIZE}}{{UNIT}} !important; min-width: {{SIZE}}{{UNIT}} !important; min-height: {{SIZE}}{{UNIT}} !important; max-width: {{SIZE}}{{UNIT}} !important; max-height: {{SIZE}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -1864,8 +1864,8 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				'size_units' => [ 'px' ],
 				'range'      => [
 					'px' => [
-						'min' => 12,
-						'max' => 40,
+						'min' => 6,
+						'max' => 60,
 					],
 				],
 				'default'    => [
@@ -1875,6 +1875,84 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				'selectors'  => [
 					'{{WRAPPER}} .wpsr-nav-arrow svg' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important;',
 					'{{WRAPPER}} .wpsr-nav-arrow i'   => 'font-size: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'arrow_prev_horizontal_position',
+			[
+				'label'      => esc_html__( 'Left Arrow Position', 'wp-social-reels-pro' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range'      => [
+					'px' => [
+						'min' => -100,
+						'max' => 200,
+					],
+					'%' => [
+						'min' => -50,
+						'max' => 50,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 12,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .wpsr-nav-arrow.wpsr-nav-prev' => 'left: {{SIZE}}{{UNIT}} !important; right: auto !important;',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'arrow_next_horizontal_position',
+			[
+				'label'      => esc_html__( 'Right Arrow Position', 'wp-social-reels-pro' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', '%' ],
+				'range'      => [
+					'px' => [
+						'min' => -100,
+						'max' => 200,
+					],
+					'%' => [
+						'min' => -50,
+						'max' => 50,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 12,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .wpsr-nav-arrow.wpsr-nav-next' => 'right: {{SIZE}}{{UNIT}} !important; left: auto !important;',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'arrow_vertical_position',
+			[
+				'label'      => esc_html__( 'Vertical Position (%)', 'wp-social-reels-pro' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ '%', 'px' ],
+				'range'      => [
+					'%' => [
+						'min' => 0,
+						'max' => 100,
+					],
+					'px' => [
+						'min' => -100,
+						'max' => 500,
+					],
+				],
+				'default'    => [
+					'unit' => '%',
+					'size' => 50,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .wpsr-nav-arrow' => 'top: {{SIZE}}{{UNIT}} !important; transform: translateY(-50%) !important;',
 				],
 			]
 		);
