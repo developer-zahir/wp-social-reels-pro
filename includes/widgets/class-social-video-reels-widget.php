@@ -84,7 +84,6 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$this->register_style_card_controls();
 		$this->register_style_top_right_badge_controls();
 		$this->register_style_play_btn_controls();
-		$this->register_style_sound_btn_controls();
 		$this->register_style_profile_controls();
 		$this->register_style_view_post_controls();
 		$this->register_style_engagement_controls();
@@ -99,7 +98,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$this->start_controls_section(
 			'section_global_profile',
 			[
-				'label' => esc_html__( 'Global Profile Settings', 'wp-social-reels-pro' ),
+				'label' => esc_html__( 'Global Social Profile Settings', 'wp-social-reels-pro' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -260,13 +259,13 @@ class Social_Video_Reels_Widget extends Widget_Base {
 	}
 
 	/**
-	 * Content Tab: Reels Items Repeater
+	 * Content Tab: Reels Items Repeater (No redundant individual profile fields)
 	 */
 	protected function register_reels_items_controls() {
 		$this->start_controls_section(
 			'section_reels_items',
 			[
-				'label' => esc_html__( 'Reels Items', 'wp-social-reels-pro' ),
+				'label' => esc_html__( 'Reels Video Items', 'wp-social-reels-pro' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -706,7 +705,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 	}
 
 	/**
-	 * Style Tab: Card Wrapper & Overlay
+	 * Style Tab: Card Wrapper & Overlay (Zero default box-shadow & no hover scaling)
 	 */
 	protected function register_style_card_controls() {
 		$this->start_controls_section(
@@ -1157,92 +1156,6 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	/**
-	 * Style Tab: Modal Audio / Sound Button Styling (Clean single icon styling)
-	 */
-	protected function register_style_sound_btn_controls() {
-		$this->start_controls_section(
-			'section_style_sound_btn',
-			[
-				'label' => esc_html__( 'Audio / Speaker Button', 'wp-social-reels-pro' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_responsive_control(
-			'card_sound_btn_icon_size',
-			[
-				'label'      => esc_html__( 'Speaker Icon Size', 'wp-social-reels-pro' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range'      => [
-					'px' => [
-						'min' => 12,
-						'max' => 48,
-					],
-				],
-				'default'    => [
-					'unit' => 'px',
-					'size' => 20,
-				],
-				'selectors'  => [
-					'body div#wpsr-global-modal .wpsr-modal-sound-btn svg' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important;',
-				],
-			]
-		);
-
-		$this->start_controls_tabs( 'tabs_sound_btn_style' );
-
-		// Normal Tab
-		$this->start_controls_tab(
-			'tab_sound_btn_normal',
-			[
-				'label' => esc_html__( 'Normal', 'wp-social-reels-pro' ),
-			]
-		);
-
-		$this->add_control(
-			'card_sound_btn_color',
-			[
-				'label'     => esc_html__( 'Icon Color', 'wp-social-reels-pro' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#ffffff',
-				'selectors' => [
-					'body div#wpsr-global-modal .wpsr-modal-sound-btn'     => 'color: {{VALUE}} !important;',
-					'body div#wpsr-global-modal .wpsr-modal-sound-btn svg' => 'fill: {{VALUE}} !important;',
-				],
-			]
-		);
-
-		$this->end_controls_tab();
-
-		// Hover Tab
-		$this->start_controls_tab(
-			'tab_sound_btn_hover',
-			[
-				'label' => esc_html__( 'Hover', 'wp-social-reels-pro' ),
-			]
-		);
-
-		$this->add_control(
-			'card_sound_btn_hover_color',
-			[
-				'label'     => esc_html__( 'Hover Icon Color', 'wp-social-reels-pro' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#e2e8f0',
-				'selectors' => [
-					'body div#wpsr-global-modal .wpsr-modal-sound-btn:hover'     => 'color: {{VALUE}} !important;',
-					'body div#wpsr-global-modal .wpsr-modal-sound-btn:hover svg' => 'fill: {{VALUE}} !important;',
-				],
-			]
-		);
-
-		$this->end_controls_tab();
-
-		$this->end_controls_tabs();
-
-		$this->end_controls_section();
-	}
 
 	/**
 	 * Style Tab: Profile Details Styling

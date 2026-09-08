@@ -30,16 +30,14 @@ Developed by **[Developer Zahir](https://developerzahir.com)**.
 
 ### 🔹 3. Interactive Full-Screen Glassmorphism Popup Modal
 * **Cinema-Grade Modal Player**: 1:1 immersive vertical video experience with real-time progress bar.
-* **Seamless Navigation**: Previous / Next navigation chevrons and keyboard shortcuts (`Esc` to close, `←` / `→` for navigation, `Space` to play/pause, `M` to mute/unmute).
+* **Instant Unmuted Audio Playback**: Videos automatically play with crystal-clear audio immediately upon opening the modal.
+* **Mobile-Optimized Close Button**: On mobile screens, the close button is ergonomically positioned at the bottom-right corner for easy thumb access.
+* **Seamless Navigation**: Previous / Next navigation chevrons and intuitive keyboard shortcuts (`Esc` to close, `←` / `→` for navigation, `Space` to play/pause).
 * **View Post Action Button**: Customizable "View post" call-to-action button with icon picker, text & icon gap controller, and full typography controls.
 
-### 🔹 4. Clean Audio & Video Controls
-* **Clean Single-Icon Audio Toggle**: Eliminates dual-icon rendering bugs with dynamic single active SVG injection (Muted vs Unmuted).
-* **Minimalistic Speaker Style**: Zero bulky backgrounds or borders—pure, sleek icon control with responsive sizing and normal/hover colors.
+### 🔹 4. Video & Viewport Controls
 * **Viewport Auto-play & Inline Playback**: IntersectionObserver-powered autoplay when scrolled into view, or inline card playback when modal is disabled.
-
-### 🔹 5. Native Elementor Design Controls (Zero Jitter)
-* **Standard Elementor Tabs**: Uses native Normal & Hover control tabs for all interactive elements (Colors, Backgrounds, Box Shadows, Borders).
+* **Native Elementor Design Controls (Zero Jitter)**: Uses native Normal & Hover control tabs for all interactive elements (Colors, Backgrounds, Box Shadows, Borders).
 * **Static Hover Behavior**: Completely removes unwanted zoom or scaling jitter, ensuring sharp, professional interactions.
 
 ---

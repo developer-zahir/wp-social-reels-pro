@@ -14,7 +14,7 @@
 	--wpsr-text-light: #ffffff;
 	--wpsr-overlay-color: rgba(0, 0, 0, 0.85);
 	--wpsr-radius: 18px;
-	--wpsr-transition: color 0.25s ease, background-color 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease;
+	--wpsr-transition: color 0.25s ease, background-color 0.25s ease, opacity 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 	--wpsr-gap: 20px;
 }
 
@@ -82,7 +82,7 @@
 }
 
 /* ==========================================================================
-   4. Reel Card Component (Static on hover - No scale / translateY)
+   4. Reel Card Component (Zero Default Box-Shadow & Static Hover)
    ========================================================================== */
 .wpsr-reel-card {
 	position: relative;
@@ -91,10 +91,10 @@
 	border-radius: var(--wpsr-radius, 18px);
 	overflow: hidden;
 	cursor: pointer;
-	box-shadow: none;
+	box-shadow: none !important; /* Zero default box-shadow */
 	border: none;
 	transition: box-shadow 0.25s ease, border-color 0.25s ease;
-	transform: none !important;
+	transform: none !important;   /* No hover scale or translateY */
 	-webkit-user-select: none;
 	user-select: none;
 	isolation: isolate;
@@ -163,7 +163,7 @@
 	transition: opacity 0.3s ease;
 }
 
-/* Centered Round Play Button (Static on hover) */
+/* Centered Round Play Button (Zero default box-shadow, Static Hover) */
 .wpsr-play-btn-wrapper {
 	position: absolute;
 	top: 50%;
@@ -182,7 +182,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+	box-shadow: none !important;
 	transition: var(--wpsr-transition);
 	transform: none !important;
 }
@@ -341,6 +341,7 @@
 	text-decoration: none !important;
 	line-height: 1;
 	transform: none !important;
+	box-shadow: none !important;
 }
 
 .wpsr-social-icon-link i {
@@ -430,7 +431,7 @@
 	border-radius: 50% !important;
 	background: #ffffff !important;
 	color: #111827 !important;
-	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+	box-shadow: none !important; /* Zero default box shadow */
 	display: flex !important;
 	align-items: center !important;
 	justify-content: center !important;
@@ -475,7 +476,6 @@
 .wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow:hover {
 	background: #ffffff !important;
 	transform: translateY(-50%) !important;
-	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
 }
 
 .wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow.swiper-button-disabled {
@@ -504,7 +504,7 @@
 }
 
 /* ==========================================================================
-   6. Full-Screen Interactive Popup Modal UI
+   6. Full-Screen Interactive Popup Modal UI (Glassmorphism & Clean Nav)
    ========================================================================== */
 body div#wpsr-global-modal.wpsr-modal-overlay {
 	position: fixed !important;
@@ -575,7 +575,7 @@ body div#wpsr-global-modal .wpsr-modal-close:hover {
 	color: #ffffff !important;
 }
 
-/* Modal Side Navigation Buttons (Left & Right of Center Video) */
+/* Modal Side Navigation Buttons (Left & Right of Center Video - No hover scale) */
 body div#wpsr-global-modal button.wpsr-modal-nav-btn,
 body div#wpsr-global-modal .wpsr-modal-nav-btn {
 	position: fixed !important;
@@ -604,6 +604,7 @@ body div#wpsr-global-modal .wpsr-modal-nav-btn {
 	padding: 0 !important;
 	margin: 0 !important;
 	box-sizing: border-box !important;
+	box-shadow: none !important;
 }
 
 body div#wpsr-global-modal .wpsr-modal-nav-btn svg {
@@ -714,7 +715,7 @@ body div#wpsr-global-modal .wpsr-modal-next {
 	text-overflow: ellipsis;
 }
 
-/* Modal View Post Button / Link */
+/* Modal View Post Button / Link (No default hover underline) */
 .wpsr-modal-view-post {
 	color: #ffffff;
 	font-size: 12.5px;
@@ -736,6 +737,7 @@ body div#wpsr-global-modal .wpsr-modal-next {
 
 .wpsr-modal-view-post .wpsr-modal-view-text {
 	line-height: 1;
+	text-decoration: none !important;
 }
 
 .wpsr-modal-view-post svg {
@@ -747,6 +749,7 @@ body div#wpsr-global-modal .wpsr-modal-next {
 
 .wpsr-modal-view-post:hover {
 	color: #e2e8f0;
+	text-decoration: none !important; /* Kept clean without default underline */
 }
 
 /* Inside-Modal Bottom Bar */
@@ -772,53 +775,6 @@ body div#wpsr-global-modal .wpsr-modal-next {
 	gap: 6px !important;
 	min-width: 0 !important;
 	flex: 1 1 auto !important;
-}
-
-/* Inside-Modal Audio/Speaker Button (Clean Single Icon, No background or border) */
-body div#wpsr-global-modal button.wpsr-modal-sound-btn,
-body div#wpsr-global-modal .wpsr-modal-sound-btn {
-	position: relative !important;
-	bottom: auto !important;
-	right: auto !important;
-	width: auto !important;
-	height: auto !important;
-	min-width: unset !important;
-	min-height: unset !important;
-	max-width: unset !important;
-	max-height: unset !important;
-	background: transparent !important;
-	backdrop-filter: none !important;
-	-webkit-backdrop-filter: none !important;
-	border: none !important;
-	border-radius: 0 !important;
-	box-shadow: none !important;
-	color: #ffffff !important;
-	display: inline-flex !important;
-	align-items: center !important;
-	justify-content: center !important;
-	cursor: pointer !important;
-	z-index: 12 !important;
-	transition: opacity 0.2s ease, color 0.2s ease !important;
-	outline: none !important;
-	padding: 0 !important;
-	margin: 0 !important;
-	flex-shrink: 0 !important;
-	line-height: 1 !important;
-	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
-	transform: none !important;
-}
-
-body div#wpsr-global-modal .wpsr-modal-sound-btn:hover {
-	background: transparent !important;
-	transform: none !important;
-	opacity: 0.85 !important;
-}
-
-body div#wpsr-global-modal .wpsr-modal-sound-btn svg {
-	width: 20px !important;
-	height: 20px !important;
-	fill: currentColor !important;
-	display: block !important;
 }
 
 .wpsr-modal-stats-row {
@@ -901,11 +857,30 @@ body div#wpsr-global-modal .wpsr-modal-sound-btn svg {
 		max-height: 100vh;
 		border-radius: 0;
 	}
-	.wpsr-modal-close {
-		top: 14px;
-		right: 14px;
-		width: 36px;
-		height: 36px;
+	/* Reposition modal close button to bottom-right (replacing audio button) on mobile */
+	body div#wpsr-global-modal button.wpsr-modal-close,
+	body div#wpsr-global-modal .wpsr-modal-close {
+		position: fixed !important;
+		top: auto !important;
+		bottom: 18px !important;
+		right: 16px !important;
+		left: auto !important;
+		width: 38px !important;
+		height: 38px !important;
+		min-width: 38px !important;
+		min-height: 38px !important;
+		border-radius: 50% !important;
+		background: rgba(0, 0, 0, 0.6) !important;
+		backdrop-filter: blur(8px) !important;
+		-webkit-backdrop-filter: blur(8px) !important;
+		border: 1px solid rgba(255, 255, 255, 0.3) !important;
+		color: #ffffff !important;
+		z-index: 1000000 !important;
+	}
+	body div#wpsr-global-modal .wpsr-modal-close svg {
+		width: 20px !important;
+		height: 20px !important;
+		stroke: #ffffff !important;
 	}
 	.wpsr-modal-prev {
 		left: 10px;
