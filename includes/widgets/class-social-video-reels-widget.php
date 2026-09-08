@@ -2068,8 +2068,8 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$layout            = ! empty( $settings['layout_type'] ) ? $settings['layout_type'] : 'carousel';
 		$aspect_ratio      = ! empty( $settings['aspect_ratio'] ) ? $settings['aspect_ratio'] : '9_16';
 		$is_carousel       = ( 'carousel' === $layout );
-		$is_modal_enabled  = ( 'yes' === $settings['enable_modal_popup'] );
-		$video_autoplay    = ( 'yes' === $settings['video_autoplay'] );
+		$is_modal_enabled  = ( ! empty( $settings['enable_modal_popup'] ) && 'yes' === $settings['enable_modal_popup'] );
+		$video_autoplay    = ( ! empty( $settings['video_autoplay'] ) && 'yes' === $settings['video_autoplay'] );
 
 		// Global Profile Details
 		$global_avatar_url   = ! empty( $settings['global_profile_avatar']['url'] ) ? esc_url( $settings['global_profile_avatar']['url'] ) : '';
@@ -2087,8 +2087,8 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		Icons_Manager::render_icon( $view_post_icon_val, [ 'aria-hidden' => 'true' ] );
 		$rendered_view_post_icon = ob_get_clean();
 
-		$show_engagement_stats = ( 'yes' === $settings['show_engagement_stats'] );
-		$show_caption          = ( 'yes' === $settings['show_caption'] );
+		$show_engagement_stats = ( ! empty( $settings['show_engagement_stats'] ) && 'yes' === $settings['show_engagement_stats'] );
+		$show_caption          = ( ! empty( $settings['show_caption'] ) && 'yes' === $settings['show_caption'] );
 
 		// Gap settings for responsive Swiper
 		$gap_desktop = ! empty( $settings['items_gap']['size'] ) ? intval( $settings['items_gap']['size'] ) : 20;
@@ -2097,17 +2097,17 @@ class Social_Video_Reels_Widget extends Widget_Base {
 
 		// Carousel Settings config JSON
 		$carousel_options = [
-			'autoplay'            => ( 'yes' === $settings['carousel_autoplay'] ),
+			'autoplay'            => ( ! empty( $settings['carousel_autoplay'] ) && 'yes' === $settings['carousel_autoplay'] ),
 			'autoplaySpeed'       => ! empty( $settings['carousel_autoplay_speed'] ) ? intval( $settings['carousel_autoplay_speed'] ) : 4000,
-			'loop'                => ( 'yes' === $settings['carousel_loop'] ),
+			'loop'                => ( ! empty( $settings['carousel_loop'] ) && 'yes' === $settings['carousel_loop'] ),
 			'slidesPerView'       => ! empty( $settings['carousel_slides_per_view'] ) ? floatval( $settings['carousel_slides_per_view'] ) : 4,
 			'slidesPerViewTablet' => ! empty( $settings['carousel_slides_per_view_tablet'] ) ? floatval( $settings['carousel_slides_per_view_tablet'] ) : 2,
 			'slidesPerViewMobile' => ! empty( $settings['carousel_slides_per_view_mobile'] ) ? floatval( $settings['carousel_slides_per_view_mobile'] ) : 1.2,
 			'spaceBetween'        => $gap_desktop,
 			'spaceBetweenTablet'  => $gap_tablet,
 			'spaceBetweenMobile'  => $gap_mobile,
-			'pagination'          => ( 'yes' === $settings['carousel_pagination'] ),
-			'arrows'              => ( 'yes' === $settings['carousel_arrows'] ),
+			'pagination'          => ( ! empty( $settings['carousel_pagination'] ) && 'yes' === $settings['carousel_pagination'] ),
+			'arrows'              => ( ! empty( $settings['carousel_arrows'] ) && 'yes' === $settings['carousel_arrows'] ),
 		];
 
 		$this->add_render_attribute(
@@ -2201,7 +2201,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$post_link_url       = ! empty( $settings['global_profile_url']['url'] ) ? esc_url( $settings['global_profile_url']['url'] ) : '#';
 		$profile_visibility  = ! empty( $settings['profile_info_visibility'] ) ? $settings['profile_info_visibility'] : 'always';
 
-		$show_top_right_icon = ( 'yes' === $settings['show_top_right_icon'] );
+		$show_top_right_icon = ( ! empty( $settings['show_top_right_icon'] ) && 'yes' === $settings['show_top_right_icon'] );
 		$has_badge_icon      = ! empty( $settings['card_social_icon']['value'] );
 
 		// Visibility checks for DOM clean-up
@@ -2211,9 +2211,9 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$caption               = ! empty( $item['caption'] ) ? $item['caption'] : '';
 		$likes_count           = isset( $item['likes_count'] ) ? $this->format_number( $item['likes_count'] ) : '0';
 		$comments_count        = isset( $item['comments_count'] ) ? $this->format_number( $item['comments_count'] ) : '0';
-		$show_engagement_stats = ( 'yes' === $settings['show_engagement_stats'] );
-		$show_caption          = ( 'yes' === $settings['show_caption'] && ! empty( $caption ) );
-		$show_play_btn         = ( 'yes' === $settings['show_play_btn'] );
+		$show_engagement_stats = ( ! empty( $settings['show_engagement_stats'] ) && 'yes' === $settings['show_engagement_stats'] );
+		$show_caption          = ( ! empty( $settings['show_caption'] ) && 'yes' === $settings['show_caption'] && ! empty( $caption ) );
+		$show_play_btn         = ( ! empty( $settings['show_play_btn'] ) && 'yes' === $settings['show_play_btn'] );
 		?>
 		<div
 			class="wpsr-reel-card"
