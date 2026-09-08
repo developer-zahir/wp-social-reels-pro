@@ -2098,14 +2098,18 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$gap_tablet  = ! empty( $settings['items_gap_tablet']['size'] ) ? intval( $settings['items_gap_tablet']['size'] ) : 16;
 		$gap_mobile  = ! empty( $settings['items_gap_mobile']['size'] ) ? intval( $settings['items_gap_mobile']['size'] ) : 12;
 
+		$spv_desktop = ! empty( $settings['carousel_slides_per_view'] ) ? floatval( $settings['carousel_slides_per_view'] ) : 4;
+		$spv_tablet  = ! empty( $settings['carousel_slides_per_view_tablet'] ) ? floatval( $settings['carousel_slides_per_view_tablet'] ) : 2;
+		$spv_mobile  = ! empty( $settings['carousel_slides_per_view_mobile'] ) ? floatval( $settings['carousel_slides_per_view_mobile'] ) : 1.2;
+
 		// Carousel Settings config JSON
 		$carousel_options = [
 			'autoplay'            => ( ! empty( $settings['carousel_autoplay'] ) && 'yes' === $settings['carousel_autoplay'] ),
 			'autoplaySpeed'       => ! empty( $settings['carousel_autoplay_speed'] ) ? intval( $settings['carousel_autoplay_speed'] ) : 4000,
 			'loop'                => ( ! empty( $settings['carousel_loop'] ) && 'yes' === $settings['carousel_loop'] ),
-			'slidesPerView'       => ! empty( $settings['carousel_slides_per_view'] ) ? floatval( $settings['carousel_slides_per_view'] ) : 4,
-			'slidesPerViewTablet' => ! empty( $settings['carousel_slides_per_view_tablet'] ) ? floatval( $settings['carousel_slides_per_view_tablet'] ) : 2,
-			'slidesPerViewMobile' => ! empty( $settings['carousel_slides_per_view_mobile'] ) ? floatval( $settings['carousel_slides_per_view_mobile'] ) : 1.2,
+			'slidesPerView'       => $spv_desktop,
+			'slidesPerViewTablet' => $spv_tablet,
+			'slidesPerViewMobile' => $spv_mobile,
 			'spaceBetween'        => $gap_desktop,
 			'spaceBetweenTablet'  => $gap_tablet,
 			'spaceBetweenMobile'  => $gap_mobile,
@@ -2123,6 +2127,15 @@ class Social_Video_Reels_Widget extends Widget_Base {
 					'wpsr-profile-vis-' . esc_attr( $profile_visibility ),
 				],
 				'id'                     => 'wpsr-reels-' . esc_attr( $widget_id ),
+				'style'                  => sprintf(
+					'--wpsr-spv-desktop: %s; --wpsr-spv-tablet: %s; --wpsr-spv-mobile: %s; --wpsr-gap-desktop: %dpx; --wpsr-gap-tablet: %dpx; --wpsr-gap-mobile: %dpx;',
+					esc_attr( $spv_desktop ),
+					esc_attr( $spv_tablet ),
+					esc_attr( $spv_mobile ),
+					$gap_desktop,
+					$gap_tablet,
+					$gap_mobile
+				),
 				'data-widget-id'         => esc_attr( $widget_id ),
 				'data-layout'            => esc_attr( $layout ),
 				'data-video-autoplay'    => $video_autoplay ? 'true' : 'false',
