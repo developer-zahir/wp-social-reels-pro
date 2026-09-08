@@ -967,89 +967,116 @@ body div#wpsr-global-modal .wpsr-modal-sound-btn svg {
 		display: none !important;
 	}
 
-	/* 4. Modal overlay and card space on mobile (not edge-to-edge full screen) */
+	/* 4. Fullscreen modal edge-to-edge with dynamic viewport height (100dvh) */
 	body div#wpsr-global-modal.wpsr-modal-overlay {
-		padding: 24px 16px !important;
+		padding: 0 !important;
 		height: 100% !important;
 		height: 100dvh !important;
 		max-height: 100dvh !important;
+		width: 100vw !important;
 		box-sizing: border-box !important;
 	}
 
 	.wpsr-modal-video-card {
-		width: 88vw !important;
-		max-width: 350px !important;
-		height: 78vh !important;
-		height: 78dvh !important;
-		max-height: 620px !important;
-		aspect-ratio: 9 / 16 !important;
-		border-radius: 10px !important;
+		width: 100vw !important;
+		max-width: 100vw !important;
+		height: 100% !important;
+		height: 100dvh !important;
+		max-height: 100dvh !important;
+		aspect-ratio: auto !important;
+		border-radius: 0 !important;
 		overflow: hidden !important;
 		box-shadow: none !important;
 		border: none !important;
 	}
 
 	.wpsr-modal-video-element {
-		border-radius: 10px !important;
+		border-radius: 0 !important;
+		width: 100% !important;
+		height: 100% !important;
+		object-fit: cover !important;
 	}
 
 	/* Inside-Modal Top Bar */
 	.wpsr-modal-top-bar {
-		padding: 14px 14px !important;
+		padding-top: max(16px, env(safe-area-inset-top, 16px)) !important;
+		padding-left: 16px !important;
+		padding-right: 16px !important;
 	}
 
-	/* Inside-Modal Bottom Bar */
+	/* Inside-Modal Bottom Bar (Padded on right for action buttons stack) */
 	.wpsr-modal-bottom-bar {
-		padding: 14px 14px 16px 14px !important;
+		padding-top: 14px !important;
+		padding-left: 16px !important;
+		padding-right: 68px !important;
+		padding-bottom: max(20px, env(safe-area-inset-bottom, 20px)) !important;
 		display: flex !important;
 		align-items: flex-end !important;
 		justify-content: space-between !important;
 	}
 
-	/* Audio button in modal bottom bar on mobile (restored to bottom-right of video) */
+	/* Bottom-Right Stacked Glassy Action Buttons on Mobile */
+	/* 1. Audio/Speaker button at bottom-right */
 	body div#wpsr-global-modal button.wpsr-modal-sound-btn,
 	body div#wpsr-global-modal .wpsr-modal-sound-btn {
-		display: inline-flex !important;
-		position: relative !important;
-		width: 34px !important;
-		height: 34px !important;
-		min-width: 34px !important;
-		min-height: 34px !important;
-		border-radius: 50% !important;
-		background-color: #7D797970 !important;
-		z-index: 12 !important;
-		bottom: auto !important;
-		right: auto !important;
+		position: fixed !important;
+		bottom: max(18px, env(safe-area-inset-bottom, 18px)) !important;
+		right: 16px !important;
 		left: auto !important;
 		top: auto !important;
+		width: 36px !important;
+		height: 36px !important;
+		min-width: 36px !important;
+		min-height: 36px !important;
+		border-radius: 50% !important;
+		background-color: #7D797970 !important;
+		backdrop-filter: blur(12px) !important;
+		-webkit-backdrop-filter: blur(12px) !important;
+		border: 1px solid rgba(255, 255, 255, 0.3) !important;
+		color: #ffffff !important;
+		display: inline-flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		z-index: 1000001 !important;
+		box-shadow: none !important;
 	}
 
-	/* Close button on mobile positioned top-right outside modal video */
+	body div#wpsr-global-modal .wpsr-modal-sound-btn svg {
+		width: 16px !important;
+		height: 16px !important;
+	}
+
+	/* 2. Close button directly above the audio button with same glassy style */
 	body div#wpsr-global-modal button.wpsr-modal-close,
 	body div#wpsr-global-modal .wpsr-modal-close {
 		position: fixed !important;
-		top: 16px !important;
+		bottom: calc(max(18px, env(safe-area-inset-bottom, 18px)) + 46px) !important;
+		top: auto !important;
 		right: 16px !important;
-		bottom: auto !important;
 		left: auto !important;
-		width: 34px !important;
-		height: 34px !important;
-		min-width: 34px !important;
-		min-height: 34px !important;
-		background: transparent !important;
-		border: none !important;
+		width: 36px !important;
+		height: 36px !important;
+		min-width: 36px !important;
+		min-height: 36px !important;
+		border-radius: 50% !important;
+		background-color: #7D797970 !important;
+		backdrop-filter: blur(12px) !important;
+		-webkit-backdrop-filter: blur(12px) !important;
+		border: 1px solid rgba(255, 255, 255, 0.3) !important;
 		color: #ffffff !important;
-		z-index: 1000000 !important;
-		display: flex !important;
+		display: inline-flex !important;
 		align-items: center !important;
 		justify-content: center !important;
+		z-index: 1000001 !important;
+		box-shadow: none !important;
 		transition: transform 0.3s ease, opacity 0.2s ease !important;
 	}
 
 	body div#wpsr-global-modal .wpsr-modal-close svg {
-		width: 22px !important;
-		height: 22px !important;
+		width: 16px !important;
+		height: 16px !important;
 		stroke: #ffffff !important;
+		stroke-width: 2.2 !important;
 	}
 
 	body div#wpsr-global-modal .wpsr-modal-close:hover {
