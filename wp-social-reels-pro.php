@@ -4,7 +4,7 @@
  * Plugin URI:        https://developerzahir.com
  * Description:       A high-performance, interactive Social Video Reels Elementor Addon with Grid/Carousel layouts, custom play overlays, inline playback, and full-screen popup modal.
  * Version:           1.6.0
- * Author:            Developer Johir
+ * Author:            Developer Zahir
  * Author URI:        https://developerzahir.com
  * Text Domain:       wp-social-reels-pro
  * Domain Path:       /languages

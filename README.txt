@@ -1,5 +1,5 @@
 === WP Social Reels Pro ===
-Contributors: developerjohir
+Contributors: developerzahir
 Tags: elementor, reels, video, tiktok, instagram, shorts, video gallery, popup video, swiper
 Requires at least: 5.8
 Tested up to: 6.7
