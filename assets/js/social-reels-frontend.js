@@ -11,6 +11,9 @@
 (function ($) {
 	'use strict';
 
+	const UNMUTED_ICON_SVG = '<svg class="wpsr-icon-sound wpsr-icon-unmuted" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
+	const MUTED_ICON_SVG = '<svg class="wpsr-icon-sound wpsr-icon-muted" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>';
+
 	/**
 	 * Social Reels Handler Class
 	 */
@@ -20,6 +23,7 @@
 		activeCardList: [],
 		activeWrapper: null,
 		currentIndex: 0,
+		isMuted: false,
 
 		/**
 		 * Initialize Widget Instance
@@ -48,11 +52,11 @@
 		},
 
 		/**
-		 * Initialize Swiper Carousel
+		 * Initialize Swiper Carousel with native Elementor Swiper support
 		 */
 		initCarousel: function ($wrapper) {
 			const $carousel = $wrapper.find('.wpsr-carousel-container');
-			if (!$carousel.length || typeof Swiper === 'undefined') return;
+			if (!$carousel.length) return;
 
 			// Destroy previous instance if re-initializing in Elementor editor
 			if ($carousel[0].swiper) {
@@ -107,23 +111,36 @@
 			}
 
 			// Navigation Arrows
-			if (config.arrows) {
+			const $next = $wrapper.find('.wpsr-nav-next');
+			const $prev = $wrapper.find('.wpsr-nav-prev');
+			if ($next.length && $prev.length) {
 				swiperOptions.navigation = {
-					nextEl: $wrapper.find('.wpsr-nav-next')[0],
-					prevEl: $wrapper.find('.wpsr-nav-prev')[0],
+					nextEl: $next[0],
+					prevEl: $prev[0],
 				};
 			}
 
 			// Pagination
-			if (config.pagination) {
+			const $pagination = $wrapper.find('.swiper-pagination');
+			if ($pagination.length) {
 				swiperOptions.pagination = {
-					el: $wrapper.find('.swiper-pagination')[0],
+					el: $pagination[0],
 					clickable: true,
 				};
 			}
 
-			// Instantiate Swiper
-			new Swiper($carousel[0], swiperOptions);
+			// Native Elementor Swiper or Global Swiper Instance
+			if (typeof Swiper !== 'undefined') {
+				new Swiper($carousel[0], swiperOptions);
+			} else if (window.elementorFrontend && window.elementorFrontend.utils && window.elementorFrontend.utils.swiper) {
+				new window.elementorFrontend.utils.swiper($carousel[0], swiperOptions).then(function (swiperInstance) {
+					$carousel[0].swiper = swiperInstance;
+				}).catch(function () {
+					if (typeof window.elementorFrontend.utils.swiper === 'function') {
+						new window.elementorFrontend.utils.swiper($carousel[0], swiperOptions);
+					}
+				});
+			}
 		},
 
 		/**
@@ -301,6 +318,11 @@
 								</div>
 								<p class="wpsr-modal-caption"></p>
 							</div>
+
+							<!-- Desktop Audio Toggle Button (Hidden on Mobile) -->
+							<button type="button" class="wpsr-modal-sound-btn" aria-label="Toggle Sound">
+								${UNMUTED_ICON_SVG}
+							</button>
 						</div>
 
 						<!-- Progress Bar -->
@@ -338,6 +360,12 @@
 				}
 			});
 
+			// Sound Mute/Unmute Toggle in Modal (Desktop)
+			$modal.find('.wpsr-modal-sound-btn').on('click', function (e) {
+				e.stopPropagation();
+				self.toggleSound();
+			});
+
 			// Video Click (Play / Pause Toggle)
 			$(video).on('click', function () {
 				if (video.paused) {
@@ -367,7 +395,7 @@
 				self.navigateModal(-1);
 			});
 
-			// Global Keydown Events (Esc, ArrowLeft, ArrowRight, Space)
+			// Global Keydown Events (Esc, ArrowLeft, ArrowRight, Space, M)
 			$(document).on('keydown', function (e) {
 				if (!$modal.hasClass('wpsr-active')) return;
 
@@ -385,6 +413,8 @@
 					} else {
 						video.pause();
 					}
+				} else if (e.key === 'm') {
+					self.toggleSound();
 				}
 			});
 		},
@@ -453,6 +483,8 @@
 				video.poster = posterSrc;
 			}
 			video.muted = false; // Start with sound enabled
+			this.isMuted = false;
+			this.updateSoundUI();
 
 			// Pause background video cards
 			$('video.wpsr-video-element').each(function () {
@@ -469,6 +501,8 @@
 				playPromise.catch(function () {
 					// Fallback only if browser policy strictly restricts unmuted playback
 					video.muted = true;
+					WPSocialReelsHandler.isMuted = true;
+					WPSocialReelsHandler.updateSoundUI();
 					video.play();
 				});
 			}
@@ -489,6 +523,37 @@
 		},
 
 		/**
+		 * Toggle Audio Sound
+		 */
+		toggleSound: function () {
+			const video = this.activeVideoEl;
+			if (!video) return;
+
+			this.isMuted = !this.isMuted;
+			video.muted = this.isMuted;
+			this.updateSoundUI();
+		},
+
+		/**
+		 * Update Sound UI Button Icon - Guarantees only one single active SVG is in DOM
+		 */
+		updateSoundUI: function () {
+			const $modal = this.modalEl;
+			if (!$modal) return;
+
+			const $soundBtn = $modal.find('.wpsr-modal-sound-btn');
+			if (this.isMuted) {
+				$soundBtn.addClass('wpsr-is-muted');
+				$soundBtn.html(MUTED_ICON_SVG);
+				$soundBtn.attr('aria-label', 'Unmute Sound');
+			} else {
+				$soundBtn.removeClass('wpsr-is-muted');
+				$soundBtn.html(UNMUTED_ICON_SVG);
+				$soundBtn.attr('aria-label', 'Mute Sound');
+			}
+		},
+
+		/**
 		 * Close Modal
 		 */
 		closeModal: function () {
@@ -505,22 +570,27 @@
 	};
 
 	/**
-	 * Hook to Elementor Frontend Ready
+	 * Hook to Elementor Frontend Ready (Handles live Editor preview re-rendering)
 	 */
-	$(window).on('elementor/frontend/init', function () {
-		elementorFrontend.hooks.addAction(
-			'frontend/element_ready/wp_social_video_reels.default',
-			function ($scope) {
-				WPSocialReelsHandler.init($scope);
-			}
-		);
-	});
+	const registerElementorHandler = function () {
+		if (window.elementorFrontend && window.elementorFrontend.hooks) {
+			window.elementorFrontend.hooks.addAction(
+				'frontend/element_ready/wp_social_video_reels.default',
+				function ($scope) {
+					WPSocialReelsHandler.init($scope);
+				}
+			);
+		}
+	};
+
+	$(window).on('elementor/frontend/init', registerElementorHandler);
 
 	// Standard DOM ready fallback for previews & non-Elementor testing
 	$(document).ready(function () {
-		if (typeof elementorFrontend === 'undefined') {
+		registerElementorHandler();
+		if (typeof window.elementorFrontend === 'undefined' || !window.elementorFrontend.hooks) {
 			$('.wpsr-reels-wrapper').each(function () {
-				WPSocialReelsHandler.init($(this).parent());
+				WPSocialReelsHandler.init($(this).closest('.elementor-widget, .wpsr-reels-wrapper'));
 			});
 		}
 	});

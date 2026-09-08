@@ -184,44 +184,45 @@ final class Plugin {
 	}
 
 	/**
-	 * Register all widget scripts and styles.
+	 * Register all widget scripts and styles using Elementor's native bundled assets (No external CDNs).
 	 */
 	public function register_frontend_assets() {
-		// Enqueue Swiper CSS if not already registered by Elementor
-		if ( ! wp_style_is( 'swiper', 'registered' ) ) {
-			wp_register_style(
-				'swiper',
-				'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css',
-				[],
-				'11.1.4'
-			);
+		$ver = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? time() : WP_SOCIAL_REELS_VERSION;
+
+		// Resolve native Elementor Swiper style dependency
+		$style_deps = [];
+		if ( wp_style_is( 'swiper', 'registered' ) ) {
+			$style_deps[] = 'swiper';
+		} elseif ( wp_style_is( 'e-swiper', 'registered' ) ) {
+			$style_deps[] = 'e-swiper';
 		}
 
-		// Enqueue Swiper JS if not already registered by Elementor
-		if ( ! wp_script_is( 'swiper', 'registered' ) ) {
-			wp_register_script(
-				'swiper',
-				'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js',
-				[ 'jquery' ],
-				'11.1.4',
-				true
-			);
+		// Resolve native Elementor Swiper and jQuery script dependencies
+		$script_deps = [ 'jquery' ];
+		if ( wp_script_is( 'swiper', 'registered' ) ) {
+			$script_deps[] = 'swiper';
+		} elseif ( wp_script_is( 'e-swiper', 'registered' ) ) {
+			$script_deps[] = 'e-swiper';
+		}
+
+		if ( wp_script_is( 'elementor-frontend', 'registered' ) ) {
+			$script_deps[] = 'elementor-frontend';
 		}
 
 		// Plugin Custom CSS
 		wp_register_style(
 			'wp-social-reels-frontend',
 			WP_SOCIAL_REELS_ASSETS_URL . 'css/social-reels-frontend.css',
-			[ 'swiper' ],
-			WP_SOCIAL_REELS_VERSION
+			$style_deps,
+			$ver
 		);
 
 		// Plugin Custom JS
 		wp_register_script(
 			'wp-social-reels-frontend',
 			WP_SOCIAL_REELS_ASSETS_URL . 'js/social-reels-frontend.js',
-			[ 'jquery', 'swiper', 'elementor-frontend' ],
-			WP_SOCIAL_REELS_VERSION,
+			$script_deps,
+			$ver,
 			true
 		);
 
@@ -232,9 +233,7 @@ final class Plugin {
 			[
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 				'i18n'    => [
-					'close' => esc_html__( 'Close Video', 'wp-social-reels-pro' ),
-					'mute'  => esc_html__( 'Mute Audio', 'wp-social-reels-pro' ),
-					'unmute'=> esc_html__( 'Unmute Audio', 'wp-social-reels-pro' ),
+					'close'    => esc_html__( 'Close Video', 'wp-social-reels-pro' ),
 					'viewPost' => esc_html__( 'View post', 'wp-social-reels-pro' ),
 				],
 			]

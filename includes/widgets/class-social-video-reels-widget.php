@@ -84,6 +84,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$this->register_style_card_controls();
 		$this->register_style_top_right_badge_controls();
 		$this->register_style_play_btn_controls();
+		$this->register_style_sound_btn_controls();
 		$this->register_style_profile_controls();
 		$this->register_style_view_post_controls();
 		$this->register_style_engagement_controls();
@@ -349,7 +350,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				'label'       => esc_html__( 'Reel Title / Caption', 'wp-social-reels-pro' ),
 				'type'        => Controls_Manager::TEXTAREA,
 				'rows'        => 2,
-				'default'     => 'Fossil Crosby FS6123 Black Dial',
+				'default'     => '',
 				'placeholder' => esc_html__( 'Enter reel title or caption...', 'wp-social-reels-pro' ),
 			]
 		);
@@ -360,35 +361,35 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				'label'       => esc_html__( 'Reels Video Items', 'wp-social-reels-pro' ),
 				'type'        => Controls_Manager::REPEATER,
 				'fields'      => $repeater->get_controls(),
-				'title_field' => '{{{ caption }}} ({{{ likes_count }}} Likes)',
+				'title_field' => '{{{ caption ? caption : "Reel Video" }}} ({{{ likes_count }}} Likes)',
 				'default'     => [
 					[
 						'video_type'     => 'external',
 						'video_url'      => 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
 						'likes_count'    => 3,
 						'comments_count' => 0,
-						'caption'        => 'Fossil Crosby FS6123 Black Dial',
+						'caption'        => '',
 					],
 					[
 						'video_type'     => 'external',
 						'video_url'      => 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
 						'likes_count'    => 11,
 						'comments_count' => 0,
-						'caption'        => 'Timex Chronograph Sky Blue Dial Vintage Edition',
+						'caption'        => '',
 					],
 					[
 						'video_type'     => 'external',
 						'video_url'      => 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
 						'likes_count'    => 24,
 						'comments_count' => 2,
-						'caption'        => 'Casio Oak Stainless Steel Custom Silver',
+						'caption'        => '',
 					],
 					[
 						'video_type'     => 'external',
 						'video_url'      => 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4',
 						'likes_count'    => 18,
 						'comments_count' => 1,
-						'caption'        => 'Seiko 5 Sports Automatic Diver Watch',
+						'caption'        => '',
 					],
 				],
 			]
@@ -997,13 +998,13 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				'size_units' => [ 'px' ],
 				'range'      => [
 					'px' => [
-						'min' => 30,
+						'min' => 20,
 						'max' => 120,
 					],
 				],
 				'default'    => [
 					'unit' => 'px',
-					'size' => 48,
+					'size' => 35,
 				],
 				'selectors'  => [
 					'{{WRAPPER}} .wpsr-play-btn' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
@@ -1019,13 +1020,13 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				'size_units' => [ 'px' ],
 				'range'      => [
 					'px' => [
-						'min' => 10,
+						'min' => 8,
 						'max' => 60,
 					],
 				],
 				'default'    => [
 					'unit' => 'px',
-					'size' => 16,
+					'size' => 12,
 				],
 				'selectors'  => [
 					'{{WRAPPER}} .wpsr-play-btn svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
@@ -1156,6 +1157,184 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Style Tab: Modal Audio / Sound Button Styling (Desktop)
+	 */
+	protected function register_style_sound_btn_controls() {
+		$this->start_controls_section(
+			'section_style_sound_btn',
+			[
+				'label' => esc_html__( 'Audio / Speaker Button (Desktop)', 'wp-social-reels-pro' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_responsive_control(
+			'card_sound_btn_size',
+			[
+				'label'      => esc_html__( 'Button Size', 'wp-social-reels-pro' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [
+						'min' => 24,
+						'max' => 60,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 36,
+				],
+				'selectors'  => [
+					'body div#wpsr-global-modal .wpsr-modal-sound-btn' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important; min-width: {{SIZE}}{{UNIT}} !important; min-height: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'card_sound_btn_icon_size',
+			[
+				'label'      => esc_html__( 'Speaker Icon Size', 'wp-social-reels-pro' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [
+						'min' => 10,
+						'max' => 36,
+					],
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 16,
+				],
+				'selectors'  => [
+					'body div#wpsr-global-modal .wpsr-modal-sound-btn svg' => 'width: {{SIZE}}{{UNIT}} !important; height: {{SIZE}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->start_controls_tabs( 'tabs_sound_btn_style' );
+
+		// Normal Tab
+		$this->start_controls_tab(
+			'tab_sound_btn_normal',
+			[
+				'label' => esc_html__( 'Normal', 'wp-social-reels-pro' ),
+			]
+		);
+
+		$this->add_control(
+			'card_sound_btn_color',
+			[
+				'label'     => esc_html__( 'Icon Color', 'wp-social-reels-pro' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ffffff',
+				'selectors' => [
+					'body div#wpsr-global-modal .wpsr-modal-sound-btn'     => 'color: {{VALUE}} !important;',
+					'body div#wpsr-global-modal .wpsr-modal-sound-btn svg' => 'fill: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'card_sound_btn_bg',
+			[
+				'label'     => esc_html__( 'Background Color', 'wp-social-reels-pro' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#7D797970',
+				'selectors' => [
+					'body div#wpsr-global-modal .wpsr-modal-sound-btn' => 'background-color: {{VALUE}} !important; background: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'card_sound_btn_box_shadow',
+				'selector' => 'body div#wpsr-global-modal .wpsr-modal-sound-btn',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		// Hover Tab
+		$this->start_controls_tab(
+			'tab_sound_btn_hover',
+			[
+				'label' => esc_html__( 'Hover', 'wp-social-reels-pro' ),
+			]
+		);
+
+		$this->add_control(
+			'card_sound_btn_hover_color',
+			[
+				'label'     => esc_html__( 'Hover Icon Color', 'wp-social-reels-pro' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ffffff',
+				'selectors' => [
+					'body div#wpsr-global-modal .wpsr-modal-sound-btn:hover'     => 'color: {{VALUE}} !important;',
+					'body div#wpsr-global-modal .wpsr-modal-sound-btn:hover svg' => 'fill: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_control(
+			'card_sound_btn_hover_bg',
+			[
+				'label'     => esc_html__( 'Hover Background Color', 'wp-social-reels-pro' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#7D797970',
+				'selectors' => [
+					'body div#wpsr-global-modal .wpsr-modal-sound-btn:hover' => 'background-color: {{VALUE}} !important; background: {{VALUE}} !important;',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'card_sound_btn_box_shadow_hover',
+				'selector' => 'body div#wpsr-global-modal .wpsr-modal-sound-btn:hover',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'      => 'card_sound_btn_border',
+				'selector'  => 'body div#wpsr-global-modal .wpsr-modal-sound-btn',
+				'separator' => 'before',
+			]
+		);
+
+		$this->add_responsive_control(
+			'card_sound_btn_border_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'wp-social-reels-pro' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'default'    => [
+					'top'      => '50',
+					'right'    => '50',
+					'bottom'   => '50',
+					'left'     => '50',
+					'unit'     => '%',
+					'isLinked' => true,
+				],
+				'selectors'  => [
+					'body div#wpsr-global-modal .wpsr-modal-sound-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+	}
+
 
 	/**
 	 * Style Tab: Profile Details Styling
@@ -1199,11 +1378,11 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em', 'rem' ],
 				'default'    => [
-					'top'      => '50',
-					'right'    => '50',
-					'bottom'   => '50',
-					'left'     => '50',
-					'unit'     => '%',
+					'top'      => '5',
+					'right'    => '5',
+					'bottom'   => '5',
+					'left'     => '5',
+					'unit'     => 'px',
 					'isLinked' => true,
 				],
 				'selectors'  => [
@@ -1506,7 +1685,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$this->add_control(
 			'show_engagement_stats',
 			[
-				'label'        => esc_html__( 'Show Engagement Stats (Likes & Comments)', 'wp-social-reels-pro' ),
+				'label'        => esc_html__( 'Show Likes & Comments', 'wp-social-reels-pro' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'label_on'     => esc_html__( 'Yes', 'wp-social-reels-pro' ),
 				'label_off'    => esc_html__( 'No', 'wp-social-reels-pro' ),
@@ -1523,13 +1702,13 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				'size_units' => [ 'px' ],
 				'range'      => [
 					'px' => [
-						'min' => 10,
+						'min' => 8,
 						'max' => 40,
 					],
 				],
 				'default'    => [
 					'unit' => 'px',
-					'size' => 16,
+					'size' => 13,
 				],
 				'selectors'  => [
 					'{{WRAPPER}} .wpsr-stat-item svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
@@ -1970,22 +2149,18 @@ class Social_Video_Reels_Widget extends Widget_Base {
 						<?php endforeach; ?>
 					</div>
 
-					<?php if ( 'yes' === $settings['carousel_pagination'] ) : ?>
-						<div class="swiper-pagination wpsr-pagination"></div>
-					<?php endif; ?>
+					<div class="swiper-pagination wpsr-pagination"></div>
 
-					<?php if ( 'yes' === $settings['carousel_arrows'] ) : ?>
-						<button type="button" class="wpsr-nav-arrow wpsr-nav-prev" aria-label="<?php esc_attr_e( 'Previous Reel', 'wp-social-reels-pro' ); ?>">
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-								<polyline points="15 18 9 12 15 6"></polyline>
-							</svg>
-						</button>
-						<button type="button" class="wpsr-nav-arrow wpsr-nav-next" aria-label="<?php esc_attr_e( 'Next Reel', 'wp-social-reels-pro' ); ?>">
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-								<polyline points="9 18 15 12 9 6"></polyline>
-							</svg>
-						</button>
-					<?php endif; ?>
+					<button type="button" class="wpsr-nav-arrow wpsr-nav-prev" aria-label="<?php esc_attr_e( 'Previous Reel', 'wp-social-reels-pro' ); ?>">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+							<polyline points="15 18 9 12 15 6"></polyline>
+						</svg>
+					</button>
+					<button type="button" class="wpsr-nav-arrow wpsr-nav-next" aria-label="<?php esc_attr_e( 'Next Reel', 'wp-social-reels-pro' ); ?>">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+							<polyline points="9 18 15 12 9 6"></polyline>
+						</svg>
+					</button>
 				</div>
 			<?php else : ?>
 				<div class="wpsr-grid-container">
