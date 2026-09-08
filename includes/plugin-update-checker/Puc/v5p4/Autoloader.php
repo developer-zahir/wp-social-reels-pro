@@ -34,8 +34,12 @@ if ( !class_exists(Autoloader::class, false) ):
 			$libraryPrefix = $isCustomNamespace ? $namespaceWithSlash : '';
 
 			$this->staticMap = array(
-				$libraryPrefix . 'PucReadmeParser' => 'vendor/PucReadmeParser.php',
-				$libraryPrefix . 'Parsedown'       => 'vendor/Parsedown.php',
+				'PucReadmeParser'                        => 'vendor/PucReadmeParser.php',
+				'Parsedown'                              => 'vendor/Parsedown.php',
+				$libraryPrefix . 'PucReadmeParser'       => 'vendor/PucReadmeParser.php',
+				$libraryPrefix . 'Parsedown'             => 'vendor/Parsedown.php',
+				__NAMESPACE__ . '\\Vcs\\PucReadmeParser' => 'vendor/PucReadmeParser.php',
+				__NAMESPACE__ . '\\PucReadmeParser'      => 'vendor/PucReadmeParser.php',
 			);
 
 			//Add the generic, major-version-only factory class to the static map.

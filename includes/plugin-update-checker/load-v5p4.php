@@ -8,6 +8,13 @@ use YahnisElsts\PluginUpdateChecker\v5p4\PucFactory as MinorFactory;
 require __DIR__ . '/Puc/v5p4/Autoloader.php';
 new Autoloader();
 
+if ( file_exists( __DIR__ . '/vendor/Parsedown.php' ) ) {
+	require_once __DIR__ . '/vendor/Parsedown.php';
+}
+if ( file_exists( __DIR__ . '/vendor/PucReadmeParser.php' ) ) {
+	require_once __DIR__ . '/vendor/PucReadmeParser.php';
+}
+
 require __DIR__ . '/Puc/v5p4/PucFactory.php';
 require __DIR__ . '/Puc/v5/PucFactory.php';
 

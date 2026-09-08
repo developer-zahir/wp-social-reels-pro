@@ -136,8 +136,19 @@ if ( !class_exists(Api::class, false) ):
 				return array();
 			}
 
-			$parser = new PucReadmeParser();
-			return $parser->parse_readme_contents($fileContents);
+			if ( ! class_exists( 'PucReadmeParser', false ) ) {
+				$parserFile = dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . '/vendor/PucReadmeParser.php';
+				if ( file_exists( $parserFile ) ) {
+					require_once $parserFile;
+				}
+			}
+
+			if ( class_exists( 'PucReadmeParser' ) ) {
+				$parser = new \PucReadmeParser();
+				return $parser->parse_readme_contents($fileContents);
+			}
+
+			return array();
 		}
 
 		/**
