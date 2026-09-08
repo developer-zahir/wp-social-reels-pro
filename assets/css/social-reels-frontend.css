@@ -1,0 +1,926 @@
+/**
+ * WP Social Reels Pro - Frontend Stylesheet
+ * 
+ * @package WPSocialReelsPro
+ * @version 1.6.0
+ */
+
+/* ==========================================================================
+   1. Base Variables & Container
+   ========================================================================== */
+:root {
+	--wpsr-primary: #ff0050;
+	--wpsr-primary-hover: #e00045;
+	--wpsr-text-light: #ffffff;
+	--wpsr-overlay-color: rgba(0, 0, 0, 0.85);
+	--wpsr-radius: 18px;
+	--wpsr-transition: color 0.25s ease, background-color 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease;
+	--wpsr-gap: 20px;
+}
+
+.wpsr-reels-wrapper {
+	position: relative;
+	width: 100%;
+	box-sizing: border-box;
+	margin: 0 auto;
+}
+
+.wpsr-reels-wrapper *,
+.wpsr-reels-wrapper *::before,
+.wpsr-reels-wrapper *::after,
+.wpsr-modal-overlay *,
+.wpsr-modal-overlay *::before,
+.wpsr-modal-overlay *::after {
+	box-sizing: border-box;
+}
+
+/* ==========================================================================
+   2. Grid & Carousel Layouts
+   ========================================================================== */
+.wpsr-grid-container {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: var(--wpsr-gap, 20px);
+	width: 100%;
+}
+
+.wpsr-carousel-container {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	padding: 4px 0 35px 0;
+}
+
+.wpsr-carousel-container .swiper-wrapper {
+	display: flex;
+	align-items: stretch;
+}
+
+.wpsr-slide-item {
+	height: auto;
+	display: flex;
+	box-sizing: border-box;
+}
+
+/* ==========================================================================
+   3. Aspect Ratios
+   ========================================================================== */
+.wpsr-aspect-9_16 .wpsr-reel-card {
+	aspect-ratio: 9 / 16;
+}
+
+.wpsr-aspect-4_5 .wpsr-reel-card {
+	aspect-ratio: 4 / 5;
+}
+
+.wpsr-aspect-1_1 .wpsr-reel-card {
+	aspect-ratio: 1 / 1;
+}
+
+.wpsr-aspect-16_9 .wpsr-reel-card {
+	aspect-ratio: 16 / 9;
+}
+
+/* ==========================================================================
+   4. Reel Card Component (Static on hover - No scale / translateY)
+   ========================================================================== */
+.wpsr-reel-card {
+	position: relative;
+	width: 100%;
+	background-color: #0d0f12;
+	border-radius: var(--wpsr-radius, 18px);
+	overflow: hidden;
+	cursor: pointer;
+	box-shadow: none;
+	border: none;
+	transition: box-shadow 0.25s ease, border-color 0.25s ease;
+	transform: none !important;
+	-webkit-user-select: none;
+	user-select: none;
+	isolation: isolate;
+}
+
+.wpsr-reel-card:hover {
+	transform: none !important;
+}
+
+.wpsr-reel-card:focus-visible {
+	outline: 2px solid var(--wpsr-primary);
+	outline-offset: 3px;
+}
+
+/* Video Wrapper */
+.wpsr-video-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	overflow: hidden;
+}
+
+.wpsr-video-element,
+.wpsr-video-poster-fallback {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	display: block;
+}
+
+/* Fallback Poster when Autoplay is OFF */
+.wpsr-autoplay-off .wpsr-video-poster-fallback {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	object-fit: cover;
+}
+
+.wpsr-autoplay-on .wpsr-video-poster-fallback {
+	display: none;
+}
+
+/* Dynamic Gradient Overlays */
+.wpsr-card-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 3;
+	pointer-events: none;
+	background: linear-gradient(
+		180deg,
+		rgba(0, 0, 0, 0.6) 0%,
+		rgba(0, 0, 0, 0.02) 28%,
+		rgba(0, 0, 0, 0.02) 58%,
+		var(--wpsr-overlay-color, rgba(0, 0, 0, 0.85)) 100%
+	);
+	transition: opacity 0.3s ease;
+}
+
+/* Centered Round Play Button (Static on hover) */
+.wpsr-play-btn-wrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 4;
+	pointer-events: none;
+}
+
+.wpsr-play-btn {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background: #ffffff;
+	color: #111827;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+	transition: var(--wpsr-transition);
+	transform: none !important;
+}
+
+.wpsr-play-btn i {
+	font-size: 16px;
+	margin-left: 2px;
+}
+
+.wpsr-play-btn svg {
+	width: 18px;
+	height: 18px;
+	fill: #111827;
+	margin-left: 2px;
+}
+
+.wpsr-reel-card:hover .wpsr-play-btn {
+	transform: none !important;
+}
+
+/* Inline Video Playback States */
+.wpsr-reel-card.wpsr-inline-playing .wpsr-play-btn-wrapper {
+	opacity: 0 !important;
+	pointer-events: none !important;
+}
+
+.wpsr-reel-card.wpsr-inline-playing .wpsr-video-poster-fallback {
+	opacity: 0 !important;
+	display: none !important;
+}
+
+.wpsr-reel-card.wpsr-inline-playing .wpsr-card-overlay {
+	opacity: 0.15 !important;
+	transition: opacity 0.3s ease !important;
+}
+
+.wpsr-reel-card.wpsr-inline-playing:hover .wpsr-card-overlay {
+	opacity: 0.75 !important;
+}
+
+/* Card Top Bar */
+.wpsr-card-top-bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 14px 14px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	z-index: 5;
+	gap: 8px;
+}
+
+.wpsr-profile-info {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	min-width: 0;
+	transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+/* Visibility: Show on Hover Option */
+.wpsr-profile-vis-on_hover .wpsr-profile-info {
+	opacity: 0 !important;
+	visibility: hidden !important;
+	pointer-events: none !important;
+	transform: none !important;
+}
+
+.wpsr-profile-vis-on_hover .wpsr-reel-card:hover .wpsr-profile-info {
+	opacity: 1 !important;
+	visibility: visible !important;
+	pointer-events: auto !important;
+	transform: none !important;
+}
+
+/* Visibility: Modal Only (hidden on cards) */
+.wpsr-profile-vis-modal_only .wpsr-profile-info {
+	display: none !important;
+}
+
+/* Visibility: Card Only (hidden in modal) */
+.wpsr-profile-vis-card_only .wpsr-modal-profile {
+	display: none !important;
+}
+
+/* Visibility: Hide Everywhere */
+.wpsr-profile-vis-none .wpsr-profile-info,
+.wpsr-profile-vis-none .wpsr-modal-profile {
+	display: none !important;
+}
+
+.wpsr-avatar {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	object-fit: cover;
+	flex-shrink: 0;
+	border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.wpsr-avatar-placeholder {
+	background: rgba(255, 255, 255, 0.25);
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 13px;
+}
+
+.wpsr-profile-meta {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	line-height: 1.25;
+}
+
+.wpsr-profile-name {
+	color: #ffffff;
+	font-weight: 700;
+	font-size: 13px;
+	letter-spacing: -0.2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.wpsr-profile-handle {
+	color: rgba(255, 255, 255, 0.75);
+	font-size: 11.5px;
+	font-weight: 500;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.wpsr-card-top-right {
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+/* Top-Right Social Icon Link (Static on hover) */
+.wpsr-social-icon-link {
+	color: #ffffff;
+	font-size: 14px;
+	font-weight: 600;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+	transition: var(--wpsr-transition);
+	text-decoration: none !important;
+	line-height: 1;
+	transform: none !important;
+}
+
+.wpsr-social-icon-link i {
+	font-size: 18px;
+	line-height: 1;
+}
+
+.wpsr-social-icon-link svg {
+	width: 18px;
+	height: 18px;
+	fill: currentColor;
+	display: inline-block;
+}
+
+.wpsr-social-icon-link:hover {
+	transform: none !important;
+	color: #ffffff;
+}
+
+/* Bottom Bar: Engagement Stats & Caption */
+.wpsr-card-bottom-bar {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 14px 14px 16px 14px;
+	z-index: 5;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.wpsr-engagement-stats {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+.wpsr-stat-item {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	color: #ffffff;
+	font-size: 13px;
+	font-weight: 600;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.wpsr-stat-icon {
+	flex-shrink: 0;
+	stroke: #ffffff;
+	filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
+}
+
+.wpsr-card-caption {
+	color: #ffffff;
+	font-size: 12.5px;
+	font-weight: 500;
+	line-height: 1.35;
+	margin: 0;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* ==========================================================================
+   5. Carousel Arrows & Pagination (Static Navigation)
+   ========================================================================== */
+.wpsr-reels-wrapper .wpsr-carousel-container {
+	position: relative !important;
+	overflow: hidden !important;
+}
+
+.wpsr-reels-wrapper .wpsr-carousel-container button.wpsr-nav-arrow,
+.wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow {
+	position: absolute !important;
+	top: 50% !important;
+	transform: translateY(-50%) !important;
+	width: 44px !important;
+	height: 44px !important;
+	min-width: 44px !important;
+	min-height: 44px !important;
+	max-width: 44px !important;
+	max-height: 44px !important;
+	border-radius: 50% !important;
+	background: #ffffff !important;
+	color: #111827 !important;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	cursor: pointer !important;
+	z-index: 35 !important;
+	transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease !important;
+	outline: none !important;
+	border: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	box-sizing: border-box !important;
+	line-height: 1 !important;
+	text-decoration: none !important;
+}
+
+.wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow svg {
+	width: 20px !important;
+	height: 20px !important;
+	stroke: #111827 !important;
+	stroke-width: 2.5 !important;
+	fill: none !important;
+	display: block !important;
+	margin: 0 !important;
+}
+
+.wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow i {
+	font-size: 16px !important;
+	color: #111827 !important;
+	line-height: 1 !important;
+}
+
+.wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow.wpsr-nav-prev {
+	left: 12px !important;
+	right: auto !important;
+}
+
+.wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow.wpsr-nav-next {
+	right: 12px !important;
+	left: auto !important;
+}
+
+.wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow:hover {
+	background: #ffffff !important;
+	transform: translateY(-50%) !important;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
+}
+
+.wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow.swiper-button-disabled {
+	opacity: 0 !important;
+	pointer-events: none !important;
+}
+
+/* Swiper Pagination */
+.wpsr-carousel-container .swiper-pagination {
+	bottom: 6px;
+}
+
+.wpsr-carousel-container .swiper-pagination-bullet {
+	width: 8px;
+	height: 8px;
+	background: rgba(0, 0, 0, 0.25);
+	opacity: 1;
+	margin: 0 4px;
+	transition: all 0.3s ease;
+}
+
+.wpsr-carousel-container .swiper-pagination-bullet-active {
+	background: #111827;
+	width: 20px;
+	border-radius: 6px;
+}
+
+/* ==========================================================================
+   6. Full-Screen Interactive Popup Modal UI
+   ========================================================================== */
+body div#wpsr-global-modal.wpsr-modal-overlay {
+	position: fixed !important;
+	top: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	bottom: 0 !important;
+	width: 100vw !important;
+	height: 100vh !important;
+	background: rgba(15, 17, 21, 0.85);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	z-index: 999999 !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.3s;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+body div#wpsr-global-modal.wpsr-modal-overlay.wpsr-active {
+	opacity: 1 !important;
+	visibility: visible !important;
+}
+
+/* Top-Right Screen Close Button (✕) */
+body div#wpsr-global-modal button.wpsr-modal-close,
+body div#wpsr-global-modal .wpsr-modal-close {
+	position: fixed !important;
+	top: 24px !important;
+	right: 24px !important;
+	left: auto !important;
+	bottom: auto !important;
+	width: 44px !important;
+	height: 44px !important;
+	min-width: 44px !important;
+	min-height: 44px !important;
+	background: transparent !important;
+	border: none !important;
+	color: #ffffff !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	cursor: pointer !important;
+	z-index: 1000000 !important;
+	transition: opacity 0.2s ease !important;
+	outline: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	box-shadow: none !important;
+	transform: none !important;
+}
+
+body div#wpsr-global-modal .wpsr-modal-close svg {
+	width: 28px !important;
+	height: 28px !important;
+	stroke: #ffffff !important;
+	stroke-width: 2.2 !important;
+	display: block !important;
+}
+
+body div#wpsr-global-modal .wpsr-modal-close:hover {
+	transform: none !important;
+	opacity: 0.8 !important;
+	color: #ffffff !important;
+}
+
+/* Modal Side Navigation Buttons (Left & Right of Center Video) */
+body div#wpsr-global-modal button.wpsr-modal-nav-btn,
+body div#wpsr-global-modal .wpsr-modal-nav-btn {
+	position: fixed !important;
+	top: 50% !important;
+	transform: translateY(-50%) !important;
+	bottom: auto !important;
+	width: 48px !important;
+	height: 48px !important;
+	min-width: 48px !important;
+	min-height: 48px !important;
+	max-width: 48px !important;
+	max-height: 48px !important;
+	border-radius: 50% !important;
+	background: rgba(255, 255, 255, 0.25) !important;
+	backdrop-filter: blur(10px) !important;
+	-webkit-backdrop-filter: blur(10px) !important;
+	border: 1px solid rgba(255, 255, 255, 0.3) !important;
+	color: #ffffff !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	cursor: pointer !important;
+	z-index: 1000000 !important;
+	transition: background-color 0.25s ease !important;
+	outline: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	box-sizing: border-box !important;
+}
+
+body div#wpsr-global-modal .wpsr-modal-nav-btn svg {
+	width: 22px !important;
+	height: 22px !important;
+	stroke: #ffffff !important;
+	stroke-width: 2.5 !important;
+	fill: none !important;
+	display: block !important;
+}
+
+body div#wpsr-global-modal .wpsr-modal-nav-btn:hover {
+	background: rgba(255, 255, 255, 0.45) !important;
+	transform: translateY(-50%) !important;
+}
+
+body div#wpsr-global-modal .wpsr-modal-prev {
+	left: 30px !important;
+	right: auto !important;
+}
+
+body div#wpsr-global-modal .wpsr-modal-next {
+	right: 30px !important;
+	left: auto !important;
+}
+
+/* Modal Center Video Card */
+.wpsr-modal-video-card {
+	position: relative;
+	width: 90vw;
+	max-width: 410px;
+	height: 82vh;
+	max-height: 720px;
+	aspect-ratio: 9 / 16;
+	border-radius: 18px;
+	overflow: hidden;
+	background: #000000;
+	box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+	display: flex;
+	flex-direction: column;
+	isolation: isolate;
+	transform: none !important;
+}
+
+.wpsr-modal-video-element {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	cursor: pointer;
+}
+
+/* Inside-Modal Top Header Bar */
+.wpsr-modal-top-bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 16px 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	z-index: 10;
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 100%);
+	gap: 12px;
+}
+
+.wpsr-modal-profile {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	min-width: 0;
+}
+
+.wpsr-modal-avatar {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	object-fit: cover;
+	flex-shrink: 0;
+	border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.wpsr-modal-profile-meta {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	line-height: 1.25;
+}
+
+.wpsr-modal-name {
+	color: #ffffff;
+	font-weight: 700;
+	font-size: 13.5px;
+	letter-spacing: -0.2px;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.wpsr-modal-handle {
+	color: rgba(255, 255, 255, 0.75);
+	font-size: 11.5px;
+	font-weight: 500;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* Modal View Post Button / Link */
+.wpsr-modal-view-post {
+	color: #ffffff;
+	font-size: 12.5px;
+	font-weight: 600;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	text-decoration: none !important;
+	text-transform: capitalize !important;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+	flex-shrink: 0;
+	transition: var(--wpsr-transition);
+	background: transparent;
+	border: none;
+	border-radius: 0;
+	padding: 0;
+	transform: none !important;
+}
+
+.wpsr-modal-view-post .wpsr-modal-view-text {
+	line-height: 1;
+}
+
+.wpsr-modal-view-post svg {
+	width: 13px;
+	height: 13px;
+	display: inline-block;
+	flex-shrink: 0;
+}
+
+.wpsr-modal-view-post:hover {
+	color: #e2e8f0;
+}
+
+/* Inside-Modal Bottom Bar */
+.wpsr-modal-bottom-bar {
+	position: absolute !important;
+	bottom: 0 !important;
+	left: 0 !important;
+	right: 0 !important;
+	width: 100% !important;
+	padding: 16px 16px 18px 16px !important;
+	z-index: 10 !important;
+	background: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 70%, rgba(0, 0, 0, 0) 100%) !important;
+	display: flex !important;
+	align-items: flex-end !important;
+	justify-content: space-between !important;
+	gap: 12px !important;
+	box-sizing: border-box !important;
+}
+
+.wpsr-modal-bottom-content {
+	display: flex !important;
+	flex-direction: column !important;
+	gap: 6px !important;
+	min-width: 0 !important;
+	flex: 1 1 auto !important;
+}
+
+/* Inside-Modal Audio/Speaker Button (Clean Single Icon, No background or border) */
+body div#wpsr-global-modal button.wpsr-modal-sound-btn,
+body div#wpsr-global-modal .wpsr-modal-sound-btn {
+	position: relative !important;
+	bottom: auto !important;
+	right: auto !important;
+	width: auto !important;
+	height: auto !important;
+	min-width: unset !important;
+	min-height: unset !important;
+	max-width: unset !important;
+	max-height: unset !important;
+	background: transparent !important;
+	backdrop-filter: none !important;
+	-webkit-backdrop-filter: none !important;
+	border: none !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	color: #ffffff !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	cursor: pointer !important;
+	z-index: 12 !important;
+	transition: opacity 0.2s ease, color 0.2s ease !important;
+	outline: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	flex-shrink: 0 !important;
+	line-height: 1 !important;
+	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
+	transform: none !important;
+}
+
+body div#wpsr-global-modal .wpsr-modal-sound-btn:hover {
+	background: transparent !important;
+	transform: none !important;
+	opacity: 0.85 !important;
+}
+
+body div#wpsr-global-modal .wpsr-modal-sound-btn svg {
+	width: 20px !important;
+	height: 20px !important;
+	fill: currentColor !important;
+	display: block !important;
+}
+
+.wpsr-modal-stats-row {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+.wpsr-modal-stat-item {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	color: #ffffff;
+	font-size: 13.5px;
+	font-weight: 600;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.wpsr-modal-stat-item svg {
+	stroke: #ffffff;
+	filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
+}
+
+.wpsr-modal-caption {
+	color: #ffffff;
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 1.35;
+	margin: 0;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Progress bar inside modal */
+.wpsr-modal-progress-bar {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	background: rgba(255, 255, 255, 0.2);
+	z-index: 15;
+}
+
+.wpsr-modal-progress-fill {
+	height: 100%;
+	width: 0%;
+	background: #ffffff;
+	transition: width 0.1s linear;
+}
+
+/* ==========================================================================
+   7. Responsive Media Queries
+   ========================================================================== */
+@media (max-width: 1024px) {
+	.wpsr-grid-container {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	.wpsr-modal-prev {
+		left: 16px;
+	}
+	.wpsr-modal-next {
+		right: 16px;
+	}
+	.wpsr-nav-prev {
+		left: 8px;
+	}
+	.wpsr-nav-next {
+		right: 8px;
+	}
+}
+
+@media (max-width: 640px) {
+	.wpsr-grid-container {
+		grid-template-columns: 1fr;
+	}
+	.wpsr-modal-video-card {
+		width: 100vw;
+		height: 100vh;
+		max-width: 100vw;
+		max-height: 100vh;
+		border-radius: 0;
+	}
+	.wpsr-modal-close {
+		top: 14px;
+		right: 14px;
+		width: 36px;
+		height: 36px;
+	}
+	.wpsr-modal-prev {
+		left: 10px;
+		width: 40px;
+		height: 40px;
+	}
+	.wpsr-modal-next {
+		right: 10px;
+		width: 40px;
+		height: 40px;
+	}
+	.wpsr-nav-prev {
+		left: 6px;
+	}
+	.wpsr-nav-next {
+		right: 6px;
+	}
+}
