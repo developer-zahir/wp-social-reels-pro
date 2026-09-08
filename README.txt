@@ -4,7 +4,7 @@ Tags: elementor, reels, video, tiktok, instagram, shorts, video gallery, popup v
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ WP Social Reels Pro is a high-performance Elementor addon for showcasing vertica
 **WP Social Reels Pro** allows you to seamlessly integrate TikTok, Instagram Reels, and YouTube Shorts-style vertical video feeds into your Elementor pages.
 
 ### Key Features:
-* **Intelligent Mobile Card Protection**: Bulletproof mobile safeguards preventing squished 9:16 vertical cards with minimum card dimensions and optimal 1.2 slides-per-view default.
+* **Responsive Aspect Ratio Selection**: Choose different Card Aspect Ratios independently across Desktop, Tablet, and Mobile (9:16, 4:5, 1:1, 16:9, or Custom Height).
 * **Carousel Navigation Position Controllers**: Fine-grained responsive controls for Left Arrow Position, Right Arrow Position, Vertical Alignment (%), Box Size down to 10px, and Icon Size down to 6px.
 * **Global & Individual Post URLs**: Assign specific social post links to individual reel items which directly apply to the card social badge and the modal "View Post" button.
 * **Global Profile Settings**: Profile Image, Brand/Profile Name, and @Handle applied uniformly across all reel cards.
@@ -39,6 +39,10 @@ WP Social Reels Pro is a high-performance Elementor addon for showcasing vertica
 5. Customize items, layouts, and styles from the Elementor sidebar!
 
 == Changelog ==
+
+= 1.7.2 =
+* Feature: Made "Card Aspect Ratio" fully responsive with independent options for Desktop, Tablet, and Mobile devices (9:16, 4:5, 1:1, 16:9, and custom).
+* Revert: Reverted forced clamping on slides per view and CSS min-width to respect exact user Elementor settings.
 
 = 1.7.1 =
 * Fix: Added automated mobile & tablet safeguard clamping for Slides Per View to prevent narrow/squeezed cards on iPhones and mobile devices.

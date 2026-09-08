@@ -512,18 +512,30 @@ class Social_Video_Reels_Widget extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'aspect_ratio',
 			[
-				'label'   => esc_html__( 'Card Aspect Ratio', 'wp-social-reels-pro' ),
-				'type'    => Controls_Manager::SELECT,
-				'default' => '9_16',
-				'options' => [
+				'label'          => esc_html__( 'Card Aspect Ratio', 'wp-social-reels-pro' ),
+				'type'           => Controls_Manager::SELECT,
+				'default'        => '9_16',
+				'tablet_default' => '9_16',
+				'mobile_default' => '9_16',
+				'options'        => [
 					'9_16'   => esc_html__( 'Vertical Reels (9:16)', 'wp-social-reels-pro' ),
 					'4_5'    => esc_html__( 'Portrait (4:5)', 'wp-social-reels-pro' ),
 					'1_1'    => esc_html__( 'Square (1:1)', 'wp-social-reels-pro' ),
 					'16_9'   => esc_html__( 'Landscape (16:9)', 'wp-social-reels-pro' ),
 					'custom' => esc_html__( 'Custom Height', 'wp-social-reels-pro' ),
+				],
+				'selectors_dictionary' => [
+					'9_16'   => 'aspect-ratio: 9 / 16 !important; height: auto !important;',
+					'4_5'    => 'aspect-ratio: 4 / 5 !important; height: auto !important;',
+					'1_1'    => 'aspect-ratio: 1 / 1 !important; height: auto !important;',
+					'16_9'   => 'aspect-ratio: 16 / 9 !important; height: auto !important;',
+					'custom' => 'aspect-ratio: unset !important;',
+				],
+				'selectors'      => [
+					'{{WRAPPER}} .wpsr-reel-card' => '{{VALUE}}',
 				],
 			]
 		);
@@ -2195,16 +2207,6 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$spv_desktop = ! empty( $settings['carousel_slides_per_view'] ) ? floatval( $settings['carousel_slides_per_view'] ) : 4;
 		$spv_tablet  = ! empty( $settings['carousel_slides_per_view_tablet'] ) ? floatval( $settings['carousel_slides_per_view_tablet'] ) : 2;
 		$spv_mobile  = ! empty( $settings['carousel_slides_per_view_mobile'] ) ? floatval( $settings['carousel_slides_per_view_mobile'] ) : 1.2;
-
-		// Intelligent Mobile & Tablet UX Safeguards:
-		// On mobile phones (<= 767px), more than 2 vertical 9:16 reels squishes cards into unusable slivers.
-		// If mobile value inherited a desktop value >= 2.5 or was unset, clamp safely to 1.2.
-		if ( $spv_mobile >= 2.5 ) {
-			$spv_mobile = 1.2;
-		}
-		if ( $spv_tablet >= 3.5 ) {
-			$spv_tablet = 2;
-		}
 
 		// Carousel Settings config JSON
 		$carousel_options = [

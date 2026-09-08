@@ -64,13 +64,6 @@
 	flex-shrink: 0;
 }
 
-@media (max-width: 767px) {
-	.wpsr-carousel-container .swiper-slide {
-		min-width: 240px !important;
-		max-width: 85vw !important;
-	}
-}
-
 /* Pre-initialization Layout (Prevents Layout Shift / FOUC before Swiper JS runs) */
 .wpsr-reels-wrapper .wpsr-carousel-container:not(.swiper-initialized) .swiper-wrapper {
 	display: flex;
