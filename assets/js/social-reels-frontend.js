@@ -75,9 +75,14 @@
 				config = {};
 			}
 
-			const spvDesktop = config.slidesPerView || 4;
-			const spvTablet = config.slidesPerViewTablet || 2;
-			const spvMobile = config.slidesPerViewMobile || 1.2;
+			let spvDesktop = parseFloat(config.slidesPerView);
+			let spvTablet = parseFloat(config.slidesPerViewTablet);
+			let spvMobile = parseFloat(config.slidesPerViewMobile);
+
+			if (isNaN(spvDesktop) || spvDesktop < 1) spvDesktop = 4;
+			if (isNaN(spvTablet) || spvTablet < 1 || spvTablet >= 3.5) spvTablet = 2;
+			if (isNaN(spvMobile) || spvMobile < 0.5 || spvMobile >= 2.5) spvMobile = 1.2;
+
 			const spaceBetweenDesktop = config.spaceBetween !== undefined ? config.spaceBetween : 20;
 			const spaceBetweenTablet = config.spaceBetweenTablet !== undefined ? config.spaceBetweenTablet : 16;
 			const spaceBetweenMobile = config.spaceBetweenMobile !== undefined ? config.spaceBetweenMobile : 12;

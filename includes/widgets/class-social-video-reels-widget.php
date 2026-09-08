@@ -2196,6 +2196,16 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$spv_tablet  = ! empty( $settings['carousel_slides_per_view_tablet'] ) ? floatval( $settings['carousel_slides_per_view_tablet'] ) : 2;
 		$spv_mobile  = ! empty( $settings['carousel_slides_per_view_mobile'] ) ? floatval( $settings['carousel_slides_per_view_mobile'] ) : 1.2;
 
+		// Intelligent Mobile & Tablet UX Safeguards:
+		// On mobile phones (<= 767px), more than 2 vertical 9:16 reels squishes cards into unusable slivers.
+		// If mobile value inherited a desktop value >= 2.5 or was unset, clamp safely to 1.2.
+		if ( $spv_mobile >= 2.5 ) {
+			$spv_mobile = 1.2;
+		}
+		if ( $spv_tablet >= 3.5 ) {
+			$spv_tablet = 2;
+		}
+
 		// Carousel Settings config JSON
 		$carousel_options = [
 			'autoplay'            => ( ! empty( $settings['carousel_autoplay'] ) && 'yes' === $settings['carousel_autoplay'] ),
