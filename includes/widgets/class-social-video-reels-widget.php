@@ -663,15 +663,24 @@ class Social_Video_Reels_Widget extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'show_play_btn',
 			[
-				'label'        => esc_html__( 'Show Centered Play Button', 'wp-social-reels-pro' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'wp-social-reels-pro' ),
-				'label_off'    => esc_html__( 'No', 'wp-social-reels-pro' ),
-				'return_value' => 'yes',
-				'default'      => 'yes',
+				'label'                => esc_html__( 'Show Centered Play Button', 'wp-social-reels-pro' ),
+				'type'                 => Controls_Manager::SWITCHER,
+				'label_on'             => esc_html__( 'Yes', 'wp-social-reels-pro' ),
+				'label_off'            => esc_html__( 'No', 'wp-social-reels-pro' ),
+				'return_value'         => 'yes',
+				'default'              => 'yes',
+				'tablet_default'       => 'yes',
+				'mobile_default'       => 'yes',
+				'selectors_dictionary' => [
+					'yes' => 'display: flex !important;',
+					''    => 'display: none !important;',
+				],
+				'selectors'            => [
+					'{{WRAPPER}} .wpsr-play-btn-wrapper' => '{{VALUE}}',
+				],
 			]
 		);
 
@@ -683,9 +692,6 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				'default'   => [
 					'value'   => 'fas fa-play',
 					'library' => 'fa-solid',
-				],
-				'condition' => [
-					'show_play_btn' => 'yes',
 				],
 			]
 		);
@@ -982,11 +988,8 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$this->start_controls_section(
 			'section_style_play_btn',
 			[
-				'label'     => esc_html__( 'Play Button', 'wp-social-reels-pro' ),
-				'tab'       => Controls_Manager::TAB_STYLE,
-				'condition' => [
-					'show_play_btn' => 'yes',
-				],
+				'label' => esc_html__( 'Play Button', 'wp-social-reels-pro' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
@@ -2252,19 +2255,17 @@ class Social_Video_Reels_Widget extends Widget_Base {
 			<div class="wpsr-card-overlay"></div>
 
 			<!-- Centered Round Play Icon Indicator -->
-			<?php if ( $show_play_btn ) : ?>
-				<div class="wpsr-play-btn-wrapper" aria-hidden="true">
-					<div class="wpsr-play-btn">
-						<?php
-						if ( ! empty( $settings['play_icon']['value'] ) ) {
-							Icons_Manager::render_icon( $settings['play_icon'], [ 'aria-hidden' => 'true' ] );
-						} else {
-							echo '<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
-						}
-						?>
-					</div>
+			<div class="wpsr-play-btn-wrapper" aria-hidden="true">
+				<div class="wpsr-play-btn">
+					<?php
+					if ( ! empty( $settings['play_icon']['value'] ) ) {
+						Icons_Manager::render_icon( $settings['play_icon'], [ 'aria-hidden' => 'true' ] );
+					} else {
+						echo '<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
+					}
+					?>
 				</div>
-			<?php endif; ?>
+			</div>
 
 			<!-- Card Top Bar: Profile Details & Top-Right Social Icon -->
 			<?php if ( $show_card_profile || $show_top_right ) : ?>
