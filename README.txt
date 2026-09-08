@@ -4,7 +4,7 @@ Tags: elementor, reels, video, tiktok, instagram, shorts, video gallery, popup v
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.6.2
+Stable tag: 1.6.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +36,10 @@ WP Social Reels Pro is a high-performance Elementor addon for showcasing vertica
 5. Customize items, layouts, and styles from the Elementor sidebar!
 
 == Changelog ==
+
+= 1.6.3 =
+* Feature: Added automatic dismissible Admin Notice banner in WordPress admin whenever a new GitHub version is available.
+* Feature: Direct one-click "Update Now" button in the admin notice banner.
 
 = 1.6.2 =
 * Fix: Fatal error when parsing remote readme caused by class autoloader namespace resolution for PucReadmeParser.
