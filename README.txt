@@ -4,7 +4,7 @@ Tags: elementor, reels, video, tiktok, instagram, shorts, video gallery, popup v
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.6.5
+Stable tag: 1.6.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +36,12 @@ WP Social Reels Pro is a high-performance Elementor addon for showcasing vertica
 5. Customize items, layouts, and styles from the Elementor sidebar!
 
 == Changelog ==
+
+= 1.6.6 =
+* Fix: Removed box-shadow on desktop modal video card.
+* Feature: Added smooth 90-degree rotate animation on hover for modal close button.
+* Fix: Restored mobile audio button in modal bottom-right and kept close button top-right.
+* Enhancement: Mobile modal card spacing with 10px rounded border radius.
 
 = 1.6.5 =
 * Fix: Maintained top-right alignment for social badge on mobile cards.
