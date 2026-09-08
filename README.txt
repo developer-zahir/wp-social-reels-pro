@@ -4,7 +4,7 @@ Tags: elementor, reels, video, tiktok, instagram, shorts, video gallery, popup v
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.6.8
+Stable tag: 1.6.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,6 +15,7 @@ WP Social Reels Pro is a high-performance Elementor addon for showcasing vertica
 **WP Social Reels Pro** allows you to seamlessly integrate TikTok, Instagram Reels, and YouTube Shorts-style vertical video feeds into your Elementor pages.
 
 ### Key Features:
+* **Global & Individual Post URLs**: Assign specific social post links to individual reel items which directly apply to the card social badge and the modal "View Post" button.
 * **Global Profile Settings**: Profile Image, Brand/Profile Name, and @Handle applied uniformly across all reel cards.
 * **Inline Video Playback**: Plays videos directly in place on cards when modal is disabled.
 * **Elementor Widget Integration**: Drag and drop "Social Video Reels" directly in the Elementor visual builder.
@@ -37,15 +38,10 @@ WP Social Reels Pro is a high-performance Elementor addon for showcasing vertica
 
 == Changelog ==
 
-= 1.6.7 =
-* Update: Mobile modal video card set to full-screen edge-to-edge (100dvh) with zero border radius.
-* Feature: Stacked glassy close button directly above speaker audio button on mobile bottom-right.
-
-= 1.6.6 =
-* Fix: Removed box-shadow on desktop modal video card.
-* Feature: Added smooth 90-degree rotate animation on hover for modal close button.
-* Fix: Restored mobile audio button in modal bottom-right and kept close button top-right.
-* Enhancement: Mobile modal card spacing with 10px rounded border radius.
+= 1.6.9 =
+* Feature: Added individual "Post / Social Link" control per reel item in the repeater.
+* Feature: Dynamically connected item-specific post URLs to card top-right social badges and modal "View Post" call-to-action button (with fallback to global URL).
+* Feature: Added visual UI showcase screenshots to GitHub documentation.
 
 = 1.6.8 =
 * Fix: Prevented pre-initialization carousel layout shift / FOUC with instant CSS slides-per-view width calculation.

@@ -355,6 +355,22 @@ class Social_Video_Reels_Widget extends Widget_Base {
 			]
 		);
 
+		$repeater->add_control(
+			'post_url',
+			[
+				'label'       => esc_html__( 'Post / Social Link', 'wp-social-reels-pro' ),
+				'type'        => Controls_Manager::URL,
+				'placeholder' => 'https://instagram.com/p/yourpost',
+				'default'     => [
+					'url'         => '',
+					'is_external' => true,
+					'nofollow'    => true,
+				],
+				'description' => esc_html__( 'Specific link for this video post. Used for the card badge and modal "View Post" button. Falls back to Global Social URL if left empty.', 'wp-social-reels-pro' ),
+				'label_block' => true,
+			]
+		);
+
 		$this->add_control(
 			'reels_list',
 			[
@@ -2214,8 +2230,32 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$avatar_url          = ! empty( $settings['global_profile_avatar']['url'] ) ? $settings['global_profile_avatar']['url'] : '';
 		$profile_name        = ! empty( $settings['global_profile_name'] ) ? $settings['global_profile_name'] : 'Run on GSC';
 		$profile_handle      = ! empty( $settings['global_profile_handle'] ) ? $settings['global_profile_handle'] : 'timecliq.watches';
-		$post_link_url       = ! empty( $settings['global_profile_url']['url'] ) ? esc_url( $settings['global_profile_url']['url'] ) : '#';
 		$profile_visibility  = ! empty( $settings['profile_info_visibility'] ) ? $settings['profile_info_visibility'] : 'always';
+
+		// Resolve Specific Video Post URL (Repeater item first, fallback to Global Profile URL)
+		$post_link_url = '#';
+		$post_target   = '_blank';
+		$post_rel      = 'noopener noreferrer';
+
+		if ( ! empty( $item['post_url']['url'] ) ) {
+			$post_link_url = $item['post_url']['url'];
+			if ( isset( $item['post_url']['is_external'] ) && ! $item['post_url']['is_external'] ) {
+				$post_target = '_self';
+			}
+			if ( ! empty( $item['post_url']['nofollow'] ) ) {
+				$post_rel .= ' nofollow';
+			}
+		} elseif ( ! empty( $item['post_url'] ) && is_string( $item['post_url'] ) ) {
+			$post_link_url = $item['post_url'];
+		} elseif ( ! empty( $settings['global_profile_url']['url'] ) ) {
+			$post_link_url = $settings['global_profile_url']['url'];
+			if ( isset( $settings['global_profile_url']['is_external'] ) && ! $settings['global_profile_url']['is_external'] ) {
+				$post_target = '_self';
+			}
+			if ( ! empty( $settings['global_profile_url']['nofollow'] ) ) {
+				$post_rel .= ' nofollow';
+			}
+		}
 
 		$show_top_right_icon = ( ! empty( $settings['show_top_right_icon'] ) && 'yes' === $settings['show_top_right_icon'] );
 		$has_badge_icon      = ! empty( $settings['card_social_icon']['value'] );
@@ -2239,6 +2279,8 @@ class Social_Video_Reels_Widget extends Widget_Base {
 			data-profile-name="<?php echo esc_attr( $profile_name ); ?>"
 			data-profile-handle="<?php echo esc_attr( $profile_handle ); ?>"
 			data-post-url="<?php echo esc_url( $post_link_url ); ?>"
+			data-post-target="<?php echo esc_attr( $post_target ); ?>"
+			data-post-rel="<?php echo esc_attr( $post_rel ); ?>"
 			data-caption="<?php echo esc_attr( $caption ); ?>"
 			data-likes="<?php echo esc_attr( $likes_count ); ?>"
 			data-comments="<?php echo esc_attr( $comments_count ); ?>"
@@ -2303,7 +2345,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 
 					<?php if ( $show_top_right ) : ?>
 						<div class="wpsr-card-top-right">
-							<a href="<?php echo esc_url( $post_link_url ); ?>" class="wpsr-social-icon-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" aria-label="<?php esc_attr_e( 'Social Link', 'wp-social-reels-pro' ); ?>">
+							<a href="<?php echo esc_url( $post_link_url ); ?>" class="wpsr-social-icon-link" target="<?php echo esc_attr( $post_target ); ?>" rel="<?php echo esc_attr( $post_rel ); ?>" onclick="event.stopPropagation();" aria-label="<?php esc_attr_e( 'Social Link', 'wp-social-reels-pro' ); ?>">
 								<?php
 								Icons_Manager::render_icon( $settings['card_social_icon'], [ 'aria-hidden' => 'true' ] );
 								?>

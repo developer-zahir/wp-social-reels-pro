@@ -4,7 +4,7 @@
 [![Elementor Compatible](https://img.shields.io/badge/Elementor-3.5.0%2B-red.svg?style=flat-square&logo=elementor)](https://elementor.com)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-777BB4.svg?style=flat-square&logo=php)](https://php.net)
 [![License: GPL v2](https://img.shields.io/badge/License-GPLv2-green.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![Version](https://img.shields.io/badge/Version-1.6.0-orange.svg?style=flat-square)](https://github.com/developer-zahir/wp-social-reels-pro)
+[![Version](https://img.shields.io/badge/Version-1.6.9-orange.svg?style=flat-square)](https://github.com/developer-zahir/wp-social-reels-pro)
 
 **WP Social Reels Pro** is a high-performance, interactive WordPress plugin & Elementor addon that brings modern vertical social video reels (TikTok, Instagram Reels, YouTube Shorts) to your WordPress website with ultra-fast rendering, touch-enabled carousels, customizable grid layouts, and an interactive full-screen popup modal player.
 
@@ -12,10 +12,25 @@ Developed by **[Developer Zahir](https://developerzahir.com)**.
 
 ---
 
+## 📸 Showcase & Visual Preview
+
+### 🎠 1. Responsive Carousel & Video Feed
+![Carousel Showcase](assets/screenshots/carousel-preview.jpg)
+
+### 🎥 2. Fullscreen Popup Modal Player
+![Modal Video Player](assets/screenshots/modal-player-preview.jpg)
+
+### ⚙️ 3. Elementor Visual Controls & Customizer
+![Elementor Editor Panel](assets/screenshots/elementor-editor-preview.jpg)
+
+---
+
 ## 🌟 Key Features
 
-### 🔹 1. Global Social Profile Customization
-* Set **Profile Avatar**, **Brand / Channel Name**, **Username / Handle (@handle)**, and **Profile URL** once to apply uniformly across all video reel cards and popup modals.
+### 🔹 1. Global & Individual Post Links
+* Assign specific **Post / Social URLs** to each individual video reel inside the repeater.
+* Specific URLs automatically apply to both the **card top-right social badge** and the **modal "View Post" call-to-action button**, with automatic fallback to the Global Social URL if not specified.
+* Set **Profile Avatar**, **Brand / Channel Name**, **Username / Handle (@handle)** once to apply uniformly across all video reel cards and popup modals.
 * 5 flexible visibility modes:
   * `Always Visible`: Displayed on both video cards and modal player.
   * `Show on Hover`: Smoothly fades in when hovering over video cards.
@@ -27,11 +42,13 @@ Developed by **[Developer Zahir](https://developerzahir.com)**.
 * **Responsive Grid Layout**: Fully customizable columns (1 to 6 columns) with device-specific responsive controls for Desktop, Tablet, and Mobile.
 * **Swiper.js Touch Carousel**: Smooth swipe/touch navigation, continuous loop mode, autoplay with speed controls, and independent device-level toggles for navigation arrows and pagination bullets.
 * **Responsive Card Gap Control**: Dedicated spacing slider for both Grid and Carousel layouts.
+* **Zero CLS / Layout Shift**: Instant CSS slide calculations prevent the initial single-card flash on page load.
+* **Dark Mode Skeleton Shimmer**: Smooth animated shimmer gradient placeholder during video/image loading.
 
 ### 🔹 3. Interactive Full-Screen Glassmorphism Popup Modal
 * **Cinema-Grade Modal Player**: 1:1 immersive vertical video experience with real-time progress bar.
 * **Instant Unmuted Audio Playback**: Videos automatically play with crystal-clear audio immediately upon opening the modal.
-* **Mobile-Optimized Close Button**: On mobile screens, the close button is ergonomically positioned at the bottom-right corner for easy thumb access.
+* **Mobile Fullscreen & Ergonomic Controls**: Full-screen edge-to-edge video on mobile screens with stacked glassy close and audio buttons on the bottom-right.
 * **Seamless Navigation**: Previous / Next navigation chevrons and intuitive keyboard shortcuts (`Esc` to close, `←` / `→` for navigation, `Space` to play/pause).
 * **View Post Action Button**: Customizable "View post" call-to-action button with icon picker, text & icon gap controller, and full typography controls.
 

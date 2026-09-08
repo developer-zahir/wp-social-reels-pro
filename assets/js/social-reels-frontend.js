@@ -433,6 +433,8 @@
 			const profileHandle = $card.attr('data-profile-handle') || '';
 			const caption = $card.attr('data-caption') || '';
 			const postUrl = $card.attr('data-post-url') || '#';
+			const postTarget = $card.attr('data-post-target') || '_blank';
+			const postRel = $card.attr('data-post-rel') || 'noopener noreferrer';
 			const likes = $card.attr('data-likes') || '0';
 			const comments = $card.attr('data-comments') || '0';
 
@@ -474,7 +476,7 @@
 			} else {
 				viewPostHTML = `<span class="wpsr-modal-view-text">${viewLabel || 'View Post'}</span> ${viewIcon || ''}`;
 			}
-			$modal.find('.wpsr-modal-view-post').attr('href', postUrl).html(viewPostHTML);
+			$modal.find('.wpsr-modal-view-post').attr('href', postUrl).attr('target', postTarget).attr('rel', postRel).html(viewPostHTML);
 
 			// Load Video - Starts with audio unmuted automatically
 			const video = $modal.find('.wpsr-modal-video-element')[0];
