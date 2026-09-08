@@ -83,12 +83,15 @@
 			const spaceBetweenTablet = config.spaceBetweenTablet !== undefined ? config.spaceBetweenTablet : 16;
 			const spaceBetweenMobile = config.spaceBetweenMobile !== undefined ? config.spaceBetweenMobile : 12;
 
+			const isAutoplay = config.autoplay !== false && config.autoplay !== undefined ? !!config.autoplay : true;
+			const isLoop = config.loop !== false;
+
 			const swiperOptions = {
 				slidesPerView: spvMobile,
 				spaceBetween: spaceBetweenMobile,
 				grabCursor: true,
-				loop: !!config.loop,
-				speed: 500,
+				loop: isLoop,
+				speed: 600,
 				watchSlidesProgress: true,
 				breakpoints: {
 					640: {
@@ -100,12 +103,33 @@
 						spaceBetween: spaceBetweenDesktop,
 					},
 				},
+				on: {
+					init: function () {
+						const modalEnabled = $wrapper.data('modal-enabled') === true || $wrapper.data('modal-enabled') === 'true';
+						const videoAutoplay = $wrapper.data('video-autoplay') === true || $wrapper.data('video-autoplay') === 'true';
+						if (videoAutoplay) {
+							WPSocialReelsHandler.initViewportObserver($wrapper);
+						}
+						WPSocialReelsHandler.initCardTriggers($wrapper, modalEnabled);
+					},
+					slideChange: function () {
+						const videoAutoplay = $wrapper.data('video-autoplay') === true || $wrapper.data('video-autoplay') === 'true';
+						if (videoAutoplay) {
+							$wrapper.find('.swiper-slide-active, .swiper-slide-next').find('.wpsr-video-element').each(function () {
+								const p = this.play();
+								if (p !== undefined) {
+									p.catch(function () {});
+								}
+							});
+						}
+					},
+				},
 			};
 
-			// Autoplay
-			if (config.autoplay) {
+			// Autoplay Configuration
+			if (isAutoplay) {
 				swiperOptions.autoplay = {
-					delay: config.autoplaySpeed || 4000,
+					delay: config.autoplaySpeed ? parseInt(config.autoplaySpeed, 10) : 3500,
 					disableOnInteraction: false,
 					pauseOnMouseEnter: true,
 				};
@@ -132,13 +156,14 @@
 
 			// Native Elementor Swiper or Global Swiper Instance
 			if (typeof Swiper !== 'undefined') {
-				new Swiper($carousel[0], swiperOptions);
+				const swiperInst = new Swiper($carousel[0], swiperOptions);
+				$carousel[0].swiper = swiperInst;
 			} else if (window.elementorFrontend && window.elementorFrontend.utils && window.elementorFrontend.utils.swiper) {
 				new window.elementorFrontend.utils.swiper($carousel[0], swiperOptions).then(function (swiperInstance) {
 					$carousel[0].swiper = swiperInstance;
 				}).catch(function () {
 					if (typeof window.elementorFrontend.utils.swiper === 'function') {
-						new window.elementorFrontend.utils.swiper($carousel[0], swiperOptions);
+						$carousel[0].swiper = new window.elementorFrontend.utils.swiper($carousel[0], swiperOptions);
 					}
 				});
 			}
@@ -199,9 +224,20 @@
 
 				if (modalEnabled) {
 					self.activeWrapper = $wrapper;
-					self.activeCardList = $cards.toArray();
-					self.currentIndex = self.activeCardList.indexOf(this);
-					self.openModal($(this));
+					const nonDuplicateCards = $wrapper.find('.swiper-slide:not(.swiper-slide-duplicate) .wpsr-reel-card');
+					self.activeCardList = (nonDuplicateCards.length ? nonDuplicateCards : $cards).toArray();
+
+					const clickedCard = this;
+					let targetIdx = self.activeCardList.indexOf(clickedCard);
+					if (targetIdx === -1) {
+						const src = $(clickedCard).attr('data-video-src') || $(clickedCard).attr('data-post-url');
+						targetIdx = self.activeCardList.findIndex(function (c) {
+							return $(c).attr('data-video-src') === src || $(c).attr('data-post-url') === src;
+						});
+						if (targetIdx === -1) targetIdx = 0;
+					}
+					self.currentIndex = targetIdx;
+					self.openModal($(self.activeCardList[self.currentIndex]));
 				} else {
 					// Inline video playback directly inside the card
 					self.toggleInlineVideo($(this), $wrapper);

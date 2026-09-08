@@ -4,7 +4,7 @@ Tags: elementor, reels, video, tiktok, instagram, shorts, video gallery, popup v
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.7.3
+Stable tag: 1.7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,12 @@ WP Social Reels Pro is a high-performance Elementor addon for showcasing vertica
 5. Customize items, layouts, and styles from the Elementor sidebar!
 
 == Changelog ==
+
+= 1.7.4 =
+* Fix: Fixed video poster fallback overlay stacking order to ensure playing videos are never covered by poster thumbnails.
+* Fix: Fixed WebKit/iOS Safari GPU compositing layer flicker where card overlay, icons, and text disappeared during touch scrolling/swiping.
+* Fix: Ensured seamless Swiper Carousel autoplay and continuous infinite looping across all slides.
+* Fix: Handled Swiper duplicated slides properly for card triggers and video playback.
 
 = 1.7.3 =
 * Fix: Resolved WebKit/Safari flex-stretch bug preventing aspect-ratio on iPhone and Safari browsers.

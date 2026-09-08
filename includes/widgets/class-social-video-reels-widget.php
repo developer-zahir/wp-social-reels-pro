@@ -591,7 +591,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				'label_on'     => esc_html__( 'Yes', 'wp-social-reels-pro' ),
 				'label_off'    => esc_html__( 'No', 'wp-social-reels-pro' ),
 				'return_value' => 'yes',
-				'default'      => '',
+				'default'      => 'yes',
 			]
 		);
 
