@@ -168,6 +168,15 @@
 					}
 				});
 			}
+
+			// Setup hover event listeners for on_hover arrow visibility
+			$wrapper.off('mouseenter.wpsrHover mouseleave.wpsrHover').on('mouseenter.wpsrHover', function () {
+				$wrapper.addClass('wpsr-is-hovered');
+				$carousel.addClass('wpsr-is-hovered');
+			}).on('mouseleave.wpsrHover', function () {
+				$wrapper.removeClass('wpsr-is-hovered');
+				$carousel.removeClass('wpsr-is-hovered');
+			});
 		},
 
 		/**

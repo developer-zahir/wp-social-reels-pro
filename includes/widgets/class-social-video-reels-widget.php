@@ -2245,7 +2245,9 @@ class Social_Video_Reels_Widget extends Widget_Base {
 			'arrows'              => ( ! empty( $settings['carousel_arrows'] ) && 'yes' === $settings['carousel_arrows'] ),
 		];
 
-		$arrows_visibility = ! empty( $settings['carousel_arrows_visibility'] ) ? $settings['carousel_arrows_visibility'] : 'always';
+		$arrows_visibility        = ! empty( $settings['carousel_arrows_visibility'] ) ? $settings['carousel_arrows_visibility'] : 'always';
+		$arrows_visibility_tablet = ! empty( $settings['carousel_arrows_visibility_tablet'] ) ? $settings['carousel_arrows_visibility_tablet'] : $arrows_visibility;
+		$arrows_visibility_mobile = ! empty( $settings['carousel_arrows_visibility_mobile'] ) ? $settings['carousel_arrows_visibility_mobile'] : $arrows_visibility_tablet;
 
 		$this->add_render_attribute(
 			'wrapper',
@@ -2256,6 +2258,8 @@ class Social_Video_Reels_Widget extends Widget_Base {
 					'wpsr-aspect-' . esc_attr( $aspect_ratio ),
 					'wpsr-profile-vis-' . esc_attr( $profile_visibility ),
 					'wpsr-arrows-vis-' . esc_attr( $arrows_visibility ),
+					'wpsr-arrows-vis-tablet-' . esc_attr( $arrows_visibility_tablet ),
+					'wpsr-arrows-vis-mobile-' . esc_attr( $arrows_visibility_mobile ),
 				],
 				'id'                     => 'wpsr-reels-' . esc_attr( $widget_id ),
 				'style'                  => sprintf(
@@ -2278,6 +2282,8 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				'data-global-url'        => $global_profile_url,
 				'data-profile-vis'       => esc_attr( $profile_visibility ),
 				'data-arrows-vis'        => esc_attr( $arrows_visibility ),
+				'data-arrows-vis-tablet' => esc_attr( $arrows_visibility_tablet ),
+				'data-arrows-vis-mobile' => esc_attr( $arrows_visibility_mobile ),
 				'data-show-stats'        => $show_engagement_stats ? 'true' : 'false',
 				'data-show-caption'      => $show_caption ? 'true' : 'false',
 				'data-view-display'      => esc_attr( $view_post_display ),
@@ -2288,7 +2294,40 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		?>
 		<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
 			<?php if ( $is_carousel ) : ?>
-				<div class="swiper wpsr-carousel-container wpsr-arrows-vis-<?php echo esc_attr( $arrows_visibility ); ?>" data-arrows-vis="<?php echo esc_attr( $arrows_visibility ); ?>">
+				<?php if ( 'on_hover' === $arrows_visibility || 'on_hover' === $arrows_visibility_tablet || 'on_hover' === $arrows_visibility_mobile ) : ?>
+					<style>
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow {
+							opacity: 0 !important;
+							visibility: hidden !important;
+							pointer-events: none !important;
+							transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.35s ease, background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease !important;
+						}
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow.wpsr-nav-prev {
+							transform: translateY(-50%) translateX(-8px) !important;
+						}
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow.wpsr-nav-next {
+							transform: translateY(-50%) translateX(8px) !important;
+						}
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>:hover .wpsr-nav-arrow,
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>.wpsr-is-hovered .wpsr-nav-arrow,
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-carousel-container:hover .wpsr-nav-arrow,
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-carousel-container.wpsr-is-hovered .wpsr-nav-arrow {
+							opacity: 1 !important;
+							visibility: visible !important;
+							pointer-events: auto !important;
+							transform: translateY(-50%) translateX(0) !important;
+						}
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>:hover .wpsr-nav-arrow.swiper-button-disabled,
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>:hover .wpsr-nav-arrow:disabled,
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>.wpsr-is-hovered .wpsr-nav-arrow.swiper-button-disabled,
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>.wpsr-is-hovered .wpsr-nav-arrow:disabled {
+							opacity: 0.25 !important;
+							cursor: not-allowed !important;
+							pointer-events: none !important;
+						}
+					</style>
+				<?php endif; ?>
+				<div class="swiper wpsr-carousel-container wpsr-arrows-vis-<?php echo esc_attr( $arrows_visibility ); ?> wpsr-arrows-vis-tablet-<?php echo esc_attr( $arrows_visibility_tablet ); ?> wpsr-arrows-vis-mobile-<?php echo esc_attr( $arrows_visibility_mobile ); ?>" data-arrows-vis="<?php echo esc_attr( $arrows_visibility ); ?>">
 					<div class="swiper-wrapper">
 						<?php foreach ( $settings['reels_list'] as $index => $item ) : ?>
 							<div class="swiper-slide wpsr-slide-item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
