@@ -658,14 +658,14 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				],
 				'prefix_class'         => 'wpsr-arrows-vis%s-',
 				'selectors_dictionary' => [
-					'always'   => 'opacity: 1 !important; visibility: visible !important; pointer-events: auto !important;',
+					'always'   => 'opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; transform: translateY(-50%) translateX(0) !important;',
 					'on_hover' => 'opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;',
 				],
 				'selectors'            => [
 					'{{WRAPPER}} .wpsr-nav-arrow' => '{{VALUE}}',
-					'{{WRAPPER}}:hover .wpsr-nav-arrow' => 'opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; transform: translateY(-50%) translateX(0) !important;',
-					'{{WRAPPER}} .wpsr-carousel-container:hover .wpsr-nav-arrow' => 'opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; transform: translateY(-50%) translateX(0) !important;',
-					'{{WRAPPER}} .wpsr-reels-wrapper:hover .wpsr-nav-arrow' => 'opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; transform: translateY(-50%) translateX(0) !important;',
+					'{{WRAPPER}}.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-prev, {{WRAPPER}} .wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-prev, {{WRAPPER}} .wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-prev, {{WRAPPER}} .wpsr-nav-prev.wpsr-arrow-on-hover' => 'transform: translateY(-50%) translateX(-6px) !important;',
+					'{{WRAPPER}}.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-next, {{WRAPPER}} .wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-next, {{WRAPPER}} .wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-next, {{WRAPPER}} .wpsr-nav-next.wpsr-arrow-on-hover' => 'transform: translateY(-50%) translateX(6px) !important;',
+					'{{WRAPPER}}:hover .wpsr-nav-arrow, {{WRAPPER}} .wpsr-carousel-container:hover .wpsr-nav-arrow, {{WRAPPER}} .wpsr-reels-wrapper:hover .wpsr-nav-arrow' => 'opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; transform: translateY(-50%) translateX(0) !important;',
 				],
 				'condition'            => [
 					'layout_type'     => 'carousel',
