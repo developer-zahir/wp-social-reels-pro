@@ -4,13 +4,18 @@ Tags: elementor, reels, video, tiktok, instagram, shorts, video gallery, popup v
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.9.0
+Stable tag: 1.9.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 WP Social Reels Pro is a high-performance Elementor addon for showcasing vertical social video reels in interactive Grid & Carousel layouts with full-screen popup modals or seamless inline playback.
 
 == Changelog ==
+
+= 1.9.1 =
+* Fix: Resolved front-end Arrow Visibility sync issue when 'On Hover' is selected.
+* Fix: Removed responsive condition on carousel_arrows_visibility ensuring Elementor display settings persist correctly.
+* Enhancement: Added robust settings retrieval fallback and strengthened scoped CSS transitions for navigation arrows.
 
 = 1.9.0 =
 * Fix: Streamlined Arrow Visibility into a single non-responsive select control (Always Visible vs On Hover).

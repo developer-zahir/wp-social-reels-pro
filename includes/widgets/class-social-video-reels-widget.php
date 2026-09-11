@@ -656,8 +656,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				],
 				'prefix_class' => 'wpsr-arrows-vis-',
 				'condition'    => [
-					'layout_type'     => 'carousel',
-					'carousel_arrows' => 'yes',
+					'layout_type' => 'carousel',
 				],
 			]
 		);
@@ -2243,7 +2242,12 @@ class Social_Video_Reels_Widget extends Widget_Base {
 			'arrows'              => ( ! empty( $settings['carousel_arrows'] ) && 'yes' === $settings['carousel_arrows'] ),
 		];
 
-		$arrows_visibility = ! empty( $settings['carousel_arrows_visibility'] ) ? $settings['carousel_arrows_visibility'] : 'always';
+		$raw_settings      = $this->get_settings();
+		$arrows_visibility = ! empty( $settings['carousel_arrows_visibility'] )
+			? $settings['carousel_arrows_visibility']
+			: ( ! empty( $raw_settings['carousel_arrows_visibility'] )
+				? $raw_settings['carousel_arrows_visibility']
+				: 'always' );
 		$is_hover_mode     = ( 'on_hover' === $arrows_visibility );
 
 		$wrapper_classes = [
@@ -2304,11 +2308,13 @@ class Social_Video_Reels_Widget extends Widget_Base {
 							transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.35s ease, background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease !important;
 						}
 						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow.wpsr-nav-prev,
-						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-prev.wpsr-arrow-on-hover {
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-prev.wpsr-arrow-on-hover,
+						.elementor-element-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow.wpsr-nav-prev {
 							transform: translateY(-50%) translateX(-8px) !important;
 						}
 						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow.wpsr-nav-next,
-						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-next.wpsr-arrow-on-hover {
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-next.wpsr-arrow-on-hover,
+						.elementor-element-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow.wpsr-nav-next {
 							transform: translateY(-50%) translateX(8px) !important;
 						}
 						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>:hover .wpsr-nav-arrow,

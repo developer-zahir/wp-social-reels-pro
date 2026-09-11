@@ -3,7 +3,7 @@
  * Plugin Name:       WP Social Reels Pro
  * Plugin URI:        https://developerzahir.com
  * Description:       A high-performance, interactive Social Video Reels Elementor Addon with Grid/Carousel layouts, custom play overlays, inline playback, and full-screen popup modal.
- * Version:           1.9.0
+ * Version:           1.9.1
  * Author:            Developer Zahir
  * Author URI:        https://developerzahir.com
  * Text Domain:       wp-social-reels-pro
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Main Plugin Constants
  */
-define( 'WP_SOCIAL_REELS_VERSION', '1.9.0' );
+define( 'WP_SOCIAL_REELS_VERSION', '1.9.1' );
 define( 'WP_SOCIAL_REELS_FILE', __FILE__ );
 define( 'WP_SOCIAL_REELS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WP_SOCIAL_REELS_URL', plugin_dir_url( __FILE__ ) );
