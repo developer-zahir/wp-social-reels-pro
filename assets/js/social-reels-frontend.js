@@ -169,11 +169,29 @@
 				});
 			}
 
+			// Determine if On Hover mode is active
+			const arrowsVis = $wrapper.data('arrows-vis') || '';
+			const arrowsVisTablet = $wrapper.data('arrows-vis-tablet') || '';
+			const arrowsVisMobile = $wrapper.data('arrows-vis-mobile') || '';
+			const hasOnHoverClass = $wrapper.hasClass('wpsr-arrows-on-hover') ||
+			                        $wrapper.hasClass('wpsr-arrows-vis-on_hover') ||
+			                        $wrapper.closest('.wpsr-arrows-vis-on_hover, [class*="wpsr-arrows-vis-on_hover"]').length > 0;
+			const isHoverMode = (arrowsVis === 'on_hover' || arrowsVisTablet === 'on_hover' || arrowsVisMobile === 'on_hover' || hasOnHoverClass);
+
+			if (isHoverMode) {
+				$wrapper.addClass('wpsr-arrows-on-hover wpsr-arrows-vis-on_hover');
+				$carousel.addClass('wpsr-arrows-on-hover wpsr-arrows-vis-on_hover');
+				$prev.addClass('wpsr-arrow-on-hover');
+				$next.addClass('wpsr-arrow-on-hover');
+			}
+
 			// Robust hover state handlers for smooth arrow entrance/exit
 			$wrapper.off('mouseenter.wpsr_hover mouseleave.wpsr_hover').on('mouseenter.wpsr_hover', function () {
 				$(this).addClass('wpsr-is-hovered');
+				$carousel.addClass('wpsr-is-hovered');
 			}).on('mouseleave.wpsr_hover', function () {
 				$(this).removeClass('wpsr-is-hovered');
+				$carousel.removeClass('wpsr-is-hovered');
 			});
 		},
 
