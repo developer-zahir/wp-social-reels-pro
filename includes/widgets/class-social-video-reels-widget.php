@@ -645,6 +645,25 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		);
 
 		$this->add_responsive_control(
+			'carousel_arrows_visibility',
+			[
+				'label'     => esc_html__( 'Arrow Visibility', 'wp-social-reels-pro' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'always',
+				'tablet_default' => 'always',
+				'mobile_default' => 'always',
+				'options'   => [
+					'always'   => esc_html__( 'Always Visible', 'wp-social-reels-pro' ),
+					'on_hover' => esc_html__( 'On Hover', 'wp-social-reels-pro' ),
+				],
+				'condition' => [
+					'layout_type'     => 'carousel',
+					'carousel_arrows' => 'yes',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
 			'carousel_pagination',
 			[
 				'label'                => esc_html__( 'Pagination Dots', 'wp-social-reels-pro' ),
@@ -2225,6 +2244,8 @@ class Social_Video_Reels_Widget extends Widget_Base {
 			'arrows'              => ( ! empty( $settings['carousel_arrows'] ) && 'yes' === $settings['carousel_arrows'] ),
 		];
 
+		$arrows_visibility = ! empty( $settings['carousel_arrows_visibility'] ) ? $settings['carousel_arrows_visibility'] : 'always';
+
 		$this->add_render_attribute(
 			'wrapper',
 			[
@@ -2233,6 +2254,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 					'wpsr-layout-' . esc_attr( $layout ),
 					'wpsr-aspect-' . esc_attr( $aspect_ratio ),
 					'wpsr-profile-vis-' . esc_attr( $profile_visibility ),
+					'wpsr-arrows-vis-' . esc_attr( $arrows_visibility ),
 				],
 				'id'                     => 'wpsr-reels-' . esc_attr( $widget_id ),
 				'style'                  => sprintf(

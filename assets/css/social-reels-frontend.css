@@ -604,6 +604,44 @@
 	pointer-events: none !important;
 }
 
+/* ==========================================================================
+   Arrow Visibility: On Hover Mode (Subtle Entrance & Exit Animations)
+   ========================================================================== */
+.wpsr-reels-wrapper.wpsr-arrows-vis-on_hover .wpsr-nav-arrow {
+	opacity: 0 !important;
+	visibility: hidden !important;
+	pointer-events: none !important;
+	transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+	            transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+	            visibility 0.3s ease,
+	            background-color 0.25s ease,
+	            color 0.25s ease,
+	            box-shadow 0.25s ease !important;
+}
+
+.wpsr-reels-wrapper.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-prev {
+	transform: translateY(-50%) translateX(-12px) !important;
+}
+
+.wpsr-reels-wrapper.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-next {
+	transform: translateY(-50%) translateX(12px) !important;
+}
+
+.wpsr-reels-wrapper.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow,
+.wpsr-reels-wrapper.wpsr-arrows-vis-on_hover:focus-within .wpsr-nav-arrow {
+	opacity: 1 !important;
+	visibility: visible !important;
+	pointer-events: auto !important;
+	transform: translateY(-50%) translateX(0) !important;
+}
+
+.wpsr-reels-wrapper.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow.swiper-button-disabled,
+.wpsr-reels-wrapper.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow:disabled {
+	opacity: 0.25 !important;
+	cursor: not-allowed !important;
+	pointer-events: none !important;
+}
+
 /* Swiper Pagination */
 .wpsr-reels-wrapper .wpsr-carousel-container .swiper-pagination,
 .wpsr-reels-wrapper .wpsr-pagination {
