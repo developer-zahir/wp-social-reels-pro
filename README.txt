@@ -4,7 +4,7 @@ Tags: elementor, reels, video, tiktok, instagram, shorts, video gallery, popup v
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.7.5
+Stable tag: 1.7.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,11 @@ WP Social Reels Pro is a high-performance Elementor addon for showcasing vertica
 5. Customize items, layouts, and styles from the Elementor sidebar!
 
 == Changelog ==
+
+= 1.7.6 =
+* Feature: Autoplay ON + Infinite Loop OFF smoothly rewinds to Item 1 when reaching the end and continues autoplaying endlessly without stopping.
+* Feature: Infinite Loop ON delivers a seamless, continuous infinite carousel with zero visible reset jump.
+* Enhancement: Configured native Swiper `rewind: !isLoop` and `loop: isLoop` for complete forward and backward navigation.
 
 = 1.7.5 =
 * Feature: Configurable "Enable Slider Loop" switcher option with clear Enable/Disable modes.

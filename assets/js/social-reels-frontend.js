@@ -91,6 +91,7 @@
 				spaceBetween: spaceBetweenMobile,
 				grabCursor: true,
 				loop: isLoop,
+				rewind: !isLoop,
 				speed: 600,
 				watchSlidesProgress: true,
 				breakpoints: {
@@ -132,7 +133,6 @@
 					delay: config.autoplaySpeed ? parseInt(config.autoplaySpeed, 10) : 3500,
 					disableOnInteraction: false,
 					pauseOnMouseEnter: true,
-					stopOnLastSlide: !isLoop,
 				};
 			}
 
