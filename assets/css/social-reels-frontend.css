@@ -627,21 +627,21 @@
 /* ==========================================================================
    Arrow Visibility: On Hover Mode (Subtle Entrance & Exit Animations)
    ========================================================================== */
-/* Hidden initially when not hovered */
-.wpsr-arrows-vis-on_hover:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow,
-.wpsr-arrows-vis-tablet-on_hover:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow,
-.wpsr-arrows-vis-mobile-on_hover:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow,
-.wpsr-arrows-on-hover:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow,
-.wpsr-reels-wrapper.wpsr-arrows-vis-on_hover:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow,
-.wpsr-reels-wrapper.wpsr-arrows-on-hover:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow,
-.wpsr-reels-wrapper[data-arrows-vis="on_hover"]:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow,
-.wpsr-carousel-container.wpsr-arrows-vis-on_hover:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow,
-.wpsr-carousel-container.wpsr-arrows-on-hover:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow,
-.wpsr-carousel-container[data-arrows-vis="on_hover"]:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow,
-.wpsr-nav-arrow.wpsr-arrow-on-hover:not(:hover),
-[class*="wpsr-arrows-vis-on_hover"]:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow,
-[class*="wpsr-arrows-on-hover"]:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow,
-[data-arrows-vis="on_hover"]:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow {
+/* 1. Base Hidden State (On Hover Mode) */
+.wpsr-arrows-vis-on_hover .wpsr-nav-arrow,
+.wpsr-arrows-vis-tablet-on_hover .wpsr-nav-arrow,
+.wpsr-arrows-vis-mobile-on_hover .wpsr-nav-arrow,
+.wpsr-arrows-on-hover .wpsr-nav-arrow,
+.wpsr-arrow-on-hover,
+.wpsr-reels-wrapper.wpsr-arrows-vis-on_hover .wpsr-nav-arrow,
+.wpsr-reels-wrapper.wpsr-arrows-on-hover .wpsr-nav-arrow,
+.wpsr-reels-wrapper[data-arrows-vis="on_hover"] .wpsr-nav-arrow,
+.wpsr-carousel-container.wpsr-arrows-vis-on_hover .wpsr-nav-arrow,
+.wpsr-carousel-container.wpsr-arrows-on-hover .wpsr-nav-arrow,
+.wpsr-carousel-container[data-arrows-vis="on_hover"] .wpsr-nav-arrow,
+[class*="wpsr-arrows-vis-on_hover"] .wpsr-nav-arrow,
+[class*="wpsr-arrows-on-hover"] .wpsr-nav-arrow,
+[data-arrows-vis="on_hover"] .wpsr-nav-arrow {
 	opacity: 0 !important;
 	visibility: hidden !important;
 	pointer-events: none !important;
@@ -657,13 +657,13 @@
 .wpsr-arrows-vis-tablet-on_hover .wpsr-nav-arrow.wpsr-nav-prev,
 .wpsr-arrows-vis-mobile-on_hover .wpsr-nav-arrow.wpsr-nav-prev,
 .wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-prev,
+.wpsr-nav-prev.wpsr-arrow-on-hover,
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-prev,
 .wpsr-reels-wrapper.wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-prev,
 .wpsr-reels-wrapper[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-prev,
 .wpsr-carousel-container.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-prev,
 .wpsr-carousel-container.wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-prev,
 .wpsr-carousel-container[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-prev,
-.wpsr-nav-arrow.wpsr-nav-prev.wpsr-arrow-on-hover,
 [class*="wpsr-arrows-vis-on_hover"] .wpsr-nav-arrow.wpsr-nav-prev,
 [class*="wpsr-arrows-on-hover"] .wpsr-nav-arrow.wpsr-nav-prev,
 [data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-prev {
@@ -674,43 +674,49 @@
 .wpsr-arrows-vis-tablet-on_hover .wpsr-nav-arrow.wpsr-nav-next,
 .wpsr-arrows-vis-mobile-on_hover .wpsr-nav-arrow.wpsr-nav-next,
 .wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-next,
+.wpsr-nav-next.wpsr-arrow-on-hover,
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-next,
 .wpsr-reels-wrapper.wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-next,
 .wpsr-reels-wrapper[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-next,
 .wpsr-carousel-container.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-next,
 .wpsr-carousel-container.wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-next,
 .wpsr-carousel-container[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-next,
-.wpsr-nav-arrow.wpsr-nav-next.wpsr-arrow-on-hover,
 [class*="wpsr-arrows-vis-on_hover"] .wpsr-nav-arrow.wpsr-nav-next,
 [class*="wpsr-arrows-on-hover"] .wpsr-nav-arrow.wpsr-nav-next,
 [data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-next {
 	transform: translateY(-50%) translateX(8px) !important;
 }
 
-/* Hover Revealed State - Strictly on hover of container/wrapper */
+/* 2. Hover Revealed State - Strictly on hover of container/wrapper */
 .elementor-widget-social-video-reels:hover .wpsr-nav-arrow,
 .elementor-widget-social-video-reels.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow,
 .elementor-widget-social-video-reels.wpsr-arrows-on-hover:hover .wpsr-nav-arrow,
 .elementor-widget-social-video-reels.wpsr-is-hovered .wpsr-nav-arrow,
+.elementor-widget:hover .wpsr-arrows-on-hover .wpsr-nav-arrow,
+.elementor-widget:hover .wpsr-arrow-on-hover,
 .wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow,
 .wpsr-arrows-vis-tablet-on_hover:hover .wpsr-nav-arrow,
 .wpsr-arrows-vis-mobile-on_hover:hover .wpsr-nav-arrow,
 .wpsr-arrows-on-hover:hover .wpsr-nav-arrow,
 .wpsr-arrows-on-hover.wpsr-is-hovered .wpsr-nav-arrow,
+.wpsr-reels-wrapper:hover .wpsr-nav-arrow,
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow,
 .wpsr-reels-wrapper.wpsr-arrows-on-hover:hover .wpsr-nav-arrow,
 .wpsr-reels-wrapper[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow,
 .wpsr-reels-wrapper:hover .wpsr-arrows-on-hover .wpsr-nav-arrow,
-.wpsr-reels-wrapper:hover .wpsr-nav-arrow,
+.wpsr-reels-wrapper:hover .wpsr-arrow-on-hover,
 .wpsr-reels-wrapper.wpsr-is-hovered .wpsr-nav-arrow,
 .wpsr-carousel-container.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow,
 .wpsr-carousel-container.wpsr-arrows-on-hover:hover .wpsr-nav-arrow,
 .wpsr-carousel-container[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow,
 .wpsr-carousel-container:hover .wpsr-arrows-on-hover .wpsr-nav-arrow,
 .wpsr-carousel-container:hover .wpsr-nav-arrow,
+.wpsr-carousel-container:hover .wpsr-arrow-on-hover,
 .wpsr-carousel-container.wpsr-is-hovered .wpsr-nav-arrow,
 [class*="wpsr-arrows-vis-on_hover"]:hover .wpsr-nav-arrow,
+[class*="wpsr-arrows-vis-on_hover"].wpsr-is-hovered .wpsr-nav-arrow,
 [class*="wpsr-arrows-on-hover"]:hover .wpsr-nav-arrow,
+[class*="wpsr-arrows-on-hover"].wpsr-is-hovered .wpsr-nav-arrow,
 [data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow,
 .wpsr-nav-arrow:hover {
 	opacity: 1 !important;

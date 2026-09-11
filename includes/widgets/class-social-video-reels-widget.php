@@ -2303,9 +2303,9 @@ class Social_Video_Reels_Widget extends Widget_Base {
 			<?php if ( $is_carousel ) : ?>
 				<?php if ( $is_hover_mode ) : ?>
 					<style>
-						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow,
-						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>:not(:hover):not(.wpsr-is-hovered) .wpsr-arrow-on-hover,
-						.elementor-element-<?php echo esc_attr( $widget_id ); ?>:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow {
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow,
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-arrow-on-hover,
+						.elementor-element-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow {
 							opacity: 0 !important;
 							visibility: hidden !important;
 							pointer-events: none !important;
