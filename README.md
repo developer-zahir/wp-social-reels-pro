@@ -4,7 +4,7 @@
 [![Elementor Compatible](https://img.shields.io/badge/Elementor-3.5.0%2B-red.svg?style=flat-square&logo=elementor)](https://elementor.com)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-777BB4.svg?style=flat-square&logo=php)](https://php.net)
 [![License: GPL v2](https://img.shields.io/badge/License-GPLv2-green.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![Version](https://img.shields.io/badge/Version-1.8.2-orange.svg?style=flat-square)](https://github.com/developer-zahir/wp-social-reels-pro)
+[![Version](https://img.shields.io/badge/Version-1.8.3-orange.svg?style=flat-square)](https://github.com/developer-zahir/wp-social-reels-pro)
 
 **WP Social Reels Pro** is a high-performance, interactive WordPress plugin & Elementor addon that brings modern vertical social video reels (TikTok, Instagram Reels, YouTube Shorts) to your WordPress website with ultra-fast rendering, touch-enabled carousels, customizable grid layouts, and an interactive full-screen popup modal player.
 
