@@ -12,19 +12,6 @@ Developed by **[Developer Zahir](https://developerzahir.com)**.
 
 ---
 
-## 📸 Showcase & Visual Preview
-
-### 🎠 1. Responsive Carousel & Video Feed
-![Carousel Showcase](assets/screenshots/carousel-preview.jpg)
-
-### 🎥 2. Fullscreen Popup Modal Player
-![Modal Video Player](assets/screenshots/modal-player-preview.jpg)
-
-### ⚙️ 3. Elementor Visual Controls & Customizer
-![Elementor Editor Panel](assets/screenshots/elementor-editor-preview.jpg)
-
----
-
 ## 🌟 Key Features
 
 ### 🔹 1. Global & Individual Post Links
