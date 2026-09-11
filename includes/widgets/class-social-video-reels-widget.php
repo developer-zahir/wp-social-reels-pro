@@ -2248,19 +2248,26 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$arrows_visibility        = ! empty( $settings['carousel_arrows_visibility'] ) ? $settings['carousel_arrows_visibility'] : 'always';
 		$arrows_visibility_tablet = ! empty( $settings['carousel_arrows_visibility_tablet'] ) ? $settings['carousel_arrows_visibility_tablet'] : $arrows_visibility;
 		$arrows_visibility_mobile = ! empty( $settings['carousel_arrows_visibility_mobile'] ) ? $settings['carousel_arrows_visibility_mobile'] : $arrows_visibility_tablet;
+		$is_hover_mode            = ( 'on_hover' === $arrows_visibility || 'on_hover' === $arrows_visibility_tablet || 'on_hover' === $arrows_visibility_mobile );
+
+		$wrapper_classes = [
+			'wpsr-reels-wrapper',
+			'wpsr-layout-' . esc_attr( $layout ),
+			'wpsr-aspect-' . esc_attr( $aspect_ratio ),
+			'wpsr-profile-vis-' . esc_attr( $profile_visibility ),
+			'wpsr-arrows-vis-' . esc_attr( $arrows_visibility ),
+			'wpsr-arrows-vis-tablet-' . esc_attr( $arrows_visibility_tablet ),
+			'wpsr-arrows-vis-mobile-' . esc_attr( $arrows_visibility_mobile ),
+		];
+
+		if ( $is_hover_mode ) {
+			$wrapper_classes[] = 'wpsr-arrows-on-hover';
+		}
 
 		$this->add_render_attribute(
 			'wrapper',
 			[
-				'class'                  => [
-					'wpsr-reels-wrapper',
-					'wpsr-layout-' . esc_attr( $layout ),
-					'wpsr-aspect-' . esc_attr( $aspect_ratio ),
-					'wpsr-profile-vis-' . esc_attr( $profile_visibility ),
-					'wpsr-arrows-vis-' . esc_attr( $arrows_visibility ),
-					'wpsr-arrows-vis-tablet-' . esc_attr( $arrows_visibility_tablet ),
-					'wpsr-arrows-vis-mobile-' . esc_attr( $arrows_visibility_mobile ),
-				],
+				'class'                  => $wrapper_classes,
 				'id'                     => 'wpsr-reels-' . esc_attr( $widget_id ),
 				'style'                  => sprintf(
 					'--wpsr-spv-desktop: %s; --wpsr-spv-tablet: %s; --wpsr-spv-mobile: %s; --wpsr-gap-desktop: %dpx; --wpsr-gap-tablet: %dpx; --wpsr-gap-mobile: %dpx;',
@@ -2294,22 +2301,27 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		?>
 		<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
 			<?php if ( $is_carousel ) : ?>
-				<?php if ( 'on_hover' === $arrows_visibility || 'on_hover' === $arrows_visibility_tablet || 'on_hover' === $arrows_visibility_mobile ) : ?>
+				<?php if ( $is_hover_mode ) : ?>
 					<style>
-						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow {
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow,
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-arrow-on-hover {
 							opacity: 0 !important;
 							visibility: hidden !important;
 							pointer-events: none !important;
 							transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.35s ease, background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease !important;
 						}
-						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow.wpsr-nav-prev {
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow.wpsr-nav-prev,
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-prev.wpsr-arrow-on-hover {
 							transform: translateY(-50%) translateX(-8px) !important;
 						}
-						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow.wpsr-nav-next {
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow.wpsr-nav-next,
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-next.wpsr-arrow-on-hover {
 							transform: translateY(-50%) translateX(8px) !important;
 						}
 						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>:hover .wpsr-nav-arrow,
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>:hover .wpsr-arrow-on-hover,
 						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>.wpsr-is-hovered .wpsr-nav-arrow,
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>.wpsr-is-hovered .wpsr-arrow-on-hover,
 						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-carousel-container:hover .wpsr-nav-arrow,
 						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-carousel-container.wpsr-is-hovered .wpsr-nav-arrow {
 							opacity: 1 !important;
@@ -2327,7 +2339,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 						}
 					</style>
 				<?php endif; ?>
-				<div class="swiper wpsr-carousel-container wpsr-arrows-vis-<?php echo esc_attr( $arrows_visibility ); ?> wpsr-arrows-vis-tablet-<?php echo esc_attr( $arrows_visibility_tablet ); ?> wpsr-arrows-vis-mobile-<?php echo esc_attr( $arrows_visibility_mobile ); ?>" data-arrows-vis="<?php echo esc_attr( $arrows_visibility ); ?>">
+				<div class="swiper wpsr-carousel-container wpsr-arrows-vis-<?php echo esc_attr( $arrows_visibility ); ?> wpsr-arrows-vis-tablet-<?php echo esc_attr( $arrows_visibility_tablet ); ?> wpsr-arrows-vis-mobile-<?php echo esc_attr( $arrows_visibility_mobile ); ?><?php echo $is_hover_mode ? ' wpsr-arrows-on-hover' : ''; ?>" data-arrows-vis="<?php echo esc_attr( $arrows_visibility ); ?>">
 					<div class="swiper-wrapper">
 						<?php foreach ( $settings['reels_list'] as $index => $item ) : ?>
 							<div class="swiper-slide wpsr-slide-item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
@@ -2338,12 +2350,12 @@ class Social_Video_Reels_Widget extends Widget_Base {
 
 					<div class="swiper-pagination wpsr-pagination"></div>
 
-					<button type="button" class="wpsr-nav-arrow wpsr-nav-prev" aria-label="<?php esc_attr_e( 'Previous Reel', 'wp-social-reels-pro' ); ?>">
+					<button type="button" class="wpsr-nav-arrow wpsr-nav-prev<?php echo $is_hover_mode ? ' wpsr-arrow-on-hover' : ''; ?>" aria-label="<?php esc_attr_e( 'Previous Reel', 'wp-social-reels-pro' ); ?>">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
 							<polyline points="15 18 9 12 15 6"></polyline>
 						</svg>
 					</button>
-					<button type="button" class="wpsr-nav-arrow wpsr-nav-next" aria-label="<?php esc_attr_e( 'Next Reel', 'wp-social-reels-pro' ); ?>">
+					<button type="button" class="wpsr-nav-arrow wpsr-nav-next<?php echo $is_hover_mode ? ' wpsr-arrow-on-hover' : ''; ?>" aria-label="<?php esc_attr_e( 'Next Reel', 'wp-social-reels-pro' ); ?>">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
 							<polyline points="9 18 15 12 9 6"></polyline>
 						</svg>

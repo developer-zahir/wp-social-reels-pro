@@ -597,8 +597,9 @@
 	transform: translateY(-50%);
 }
 
-.wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow.swiper-button-disabled,
-.wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow:disabled {
+/* Base Disabled State (Only applies when NOT in on_hover mode) */
+.wpsr-reels-wrapper:not(.wpsr-arrows-on-hover):not(.wpsr-arrows-vis-on_hover):not([data-arrows-vis="on_hover"]) .wpsr-carousel-container .wpsr-nav-arrow:not(.wpsr-arrow-on-hover).swiper-button-disabled,
+.wpsr-reels-wrapper:not(.wpsr-arrows-on-hover):not(.wpsr-arrows-vis-on_hover):not([data-arrows-vis="on_hover"]) .wpsr-carousel-container .wpsr-nav-arrow:not(.wpsr-arrow-on-hover):disabled {
 	opacity: 0.25 !important;
 	cursor: not-allowed !important;
 	pointer-events: none !important;
@@ -610,11 +611,16 @@
 .wpsr-arrows-vis-on_hover .wpsr-nav-arrow,
 .wpsr-arrows-vis-tablet-on_hover .wpsr-nav-arrow,
 .wpsr-arrows-vis-mobile-on_hover .wpsr-nav-arrow,
+.wpsr-arrows-on-hover .wpsr-nav-arrow,
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover .wpsr-nav-arrow,
+.wpsr-reels-wrapper.wpsr-arrows-on-hover .wpsr-nav-arrow,
 .wpsr-reels-wrapper[data-arrows-vis="on_hover"] .wpsr-nav-arrow,
 .wpsr-carousel-container.wpsr-arrows-vis-on_hover .wpsr-nav-arrow,
+.wpsr-carousel-container.wpsr-arrows-on-hover .wpsr-nav-arrow,
 .wpsr-carousel-container[data-arrows-vis="on_hover"] .wpsr-nav-arrow,
+.wpsr-nav-arrow.wpsr-arrow-on-hover,
 [class*="wpsr-arrows-vis-on_hover"] .wpsr-nav-arrow,
+[class*="wpsr-arrows-on-hover"] .wpsr-nav-arrow,
 [data-arrows-vis="on_hover"] .wpsr-nav-arrow {
 	opacity: 0 !important;
 	visibility: hidden !important;
@@ -630,11 +636,16 @@
 .wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-prev,
 .wpsr-arrows-vis-tablet-on_hover .wpsr-nav-arrow.wpsr-nav-prev,
 .wpsr-arrows-vis-mobile-on_hover .wpsr-nav-arrow.wpsr-nav-prev,
+.wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-prev,
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-prev,
+.wpsr-reels-wrapper.wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-prev,
 .wpsr-reels-wrapper[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-prev,
 .wpsr-carousel-container.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-prev,
+.wpsr-carousel-container.wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-prev,
 .wpsr-carousel-container[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-prev,
+.wpsr-nav-arrow.wpsr-nav-prev.wpsr-arrow-on-hover,
 [class*="wpsr-arrows-vis-on_hover"] .wpsr-nav-arrow.wpsr-nav-prev,
+[class*="wpsr-arrows-on-hover"] .wpsr-nav-arrow.wpsr-nav-prev,
 [data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-prev {
 	transform: translateY(-50%) translateX(-8px) !important;
 }
@@ -642,32 +653,50 @@
 .wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-next,
 .wpsr-arrows-vis-tablet-on_hover .wpsr-nav-arrow.wpsr-nav-next,
 .wpsr-arrows-vis-mobile-on_hover .wpsr-nav-arrow.wpsr-nav-next,
+.wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-next,
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-next,
+.wpsr-reels-wrapper.wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-next,
 .wpsr-reels-wrapper[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-next,
 .wpsr-carousel-container.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-next,
+.wpsr-carousel-container.wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-next,
 .wpsr-carousel-container[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-next,
+.wpsr-nav-arrow.wpsr-nav-next.wpsr-arrow-on-hover,
 [class*="wpsr-arrows-vis-on_hover"] .wpsr-nav-arrow.wpsr-nav-next,
+[class*="wpsr-arrows-on-hover"] .wpsr-nav-arrow.wpsr-nav-next,
 [data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-next {
 	transform: translateY(-50%) translateX(8px) !important;
 }
 
 /* Hover Revealed State - Strictly on hover of container/wrapper or JS is-hovered */
+.elementor-widget-social-video-reels:hover .wpsr-nav-arrow.wpsr-arrow-on-hover,
 .wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow,
 .wpsr-arrows-vis-on_hover.wpsr-is-hovered .wpsr-nav-arrow,
 .wpsr-arrows-vis-tablet-on_hover:hover .wpsr-nav-arrow,
 .wpsr-arrows-vis-tablet-on_hover.wpsr-is-hovered .wpsr-nav-arrow,
 .wpsr-arrows-vis-mobile-on_hover:hover .wpsr-nav-arrow,
 .wpsr-arrows-vis-mobile-on_hover.wpsr-is-hovered .wpsr-nav-arrow,
+.wpsr-arrows-on-hover:hover .wpsr-nav-arrow,
+.wpsr-arrows-on-hover.wpsr-is-hovered .wpsr-nav-arrow,
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow,
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover.wpsr-is-hovered .wpsr-nav-arrow,
+.wpsr-reels-wrapper.wpsr-arrows-on-hover:hover .wpsr-nav-arrow,
+.wpsr-reels-wrapper.wpsr-arrows-on-hover.wpsr-is-hovered .wpsr-nav-arrow,
 .wpsr-reels-wrapper[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow,
 .wpsr-reels-wrapper[data-arrows-vis="on_hover"].wpsr-is-hovered .wpsr-nav-arrow,
 .wpsr-carousel-container.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow,
 .wpsr-carousel-container.wpsr-arrows-vis-on_hover.wpsr-is-hovered .wpsr-nav-arrow,
+.wpsr-carousel-container.wpsr-arrows-on-hover:hover .wpsr-nav-arrow,
+.wpsr-carousel-container.wpsr-arrows-on-hover.wpsr-is-hovered .wpsr-nav-arrow,
 .wpsr-carousel-container[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow,
 .wpsr-carousel-container[data-arrows-vis="on_hover"].wpsr-is-hovered .wpsr-nav-arrow,
+.wpsr-reels-wrapper:hover .wpsr-nav-arrow.wpsr-arrow-on-hover,
+.wpsr-reels-wrapper.wpsr-is-hovered .wpsr-nav-arrow.wpsr-arrow-on-hover,
+.wpsr-carousel-container:hover .wpsr-nav-arrow.wpsr-arrow-on-hover,
+.wpsr-carousel-container.wpsr-is-hovered .wpsr-nav-arrow.wpsr-arrow-on-hover,
 [class*="wpsr-arrows-vis-on_hover"]:hover .wpsr-nav-arrow,
 [class*="wpsr-arrows-vis-on_hover"].wpsr-is-hovered .wpsr-nav-arrow,
+[class*="wpsr-arrows-on-hover"]:hover .wpsr-nav-arrow,
+[class*="wpsr-arrows-on-hover"].wpsr-is-hovered .wpsr-nav-arrow,
 [data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow,
 [data-arrows-vis="on_hover"].wpsr-is-hovered .wpsr-nav-arrow {
 	opacity: 1 !important;
@@ -676,19 +705,33 @@
 	transform: translateY(-50%) translateX(0) !important;
 }
 
-/* Disabled state on hover */
+/* Disabled state on hover (shows at 0.25 only while hovered) */
 .wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow.swiper-button-disabled,
 .wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow:disabled,
+.wpsr-arrows-on-hover:hover .wpsr-nav-arrow.swiper-button-disabled,
+.wpsr-arrows-on-hover:hover .wpsr-nav-arrow:disabled,
+.wpsr-arrows-on-hover.wpsr-is-hovered .wpsr-nav-arrow.swiper-button-disabled,
+.wpsr-arrows-on-hover.wpsr-is-hovered .wpsr-nav-arrow:disabled,
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow.swiper-button-disabled,
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow:disabled,
+.wpsr-reels-wrapper.wpsr-arrows-on-hover:hover .wpsr-nav-arrow.swiper-button-disabled,
+.wpsr-reels-wrapper.wpsr-arrows-on-hover:hover .wpsr-nav-arrow:disabled,
 .wpsr-reels-wrapper[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow.swiper-button-disabled,
 .wpsr-reels-wrapper[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow:disabled,
+.wpsr-reels-wrapper:hover .wpsr-nav-arrow.wpsr-arrow-on-hover.swiper-button-disabled,
+.wpsr-reels-wrapper:hover .wpsr-nav-arrow.wpsr-arrow-on-hover:disabled,
 .wpsr-carousel-container.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow.swiper-button-disabled,
 .wpsr-carousel-container.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow:disabled,
+.wpsr-carousel-container.wpsr-arrows-on-hover:hover .wpsr-nav-arrow.swiper-button-disabled,
+.wpsr-carousel-container.wpsr-arrows-on-hover:hover .wpsr-nav-arrow:disabled,
 .wpsr-carousel-container[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow.swiper-button-disabled,
 .wpsr-carousel-container[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow:disabled,
+.wpsr-carousel-container:hover .wpsr-nav-arrow.wpsr-arrow-on-hover.swiper-button-disabled,
+.wpsr-carousel-container:hover .wpsr-nav-arrow.wpsr-arrow-on-hover:disabled,
 [class*="wpsr-arrows-vis-on_hover"]:hover .wpsr-nav-arrow.swiper-button-disabled,
 [class*="wpsr-arrows-vis-on_hover"]:hover .wpsr-nav-arrow:disabled,
+[class*="wpsr-arrows-on-hover"]:hover .wpsr-nav-arrow.swiper-button-disabled,
+[class*="wpsr-arrows-on-hover"]:hover .wpsr-nav-arrow:disabled,
 [data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow.swiper-button-disabled,
 [data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow:disabled {
 	opacity: 0.25 !important;
