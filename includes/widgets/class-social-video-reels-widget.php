@@ -647,17 +647,27 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$this->add_responsive_control(
 			'carousel_arrows_visibility',
 			[
-				'label'        => esc_html__( 'Arrow Visibility', 'wp-social-reels-pro' ),
-				'type'         => Controls_Manager::SELECT,
-				'default'      => 'always',
-				'tablet_default' => 'always',
-				'mobile_default' => 'always',
-				'options'      => [
+				'label'                => esc_html__( 'Arrow Visibility', 'wp-social-reels-pro' ),
+				'type'                 => Controls_Manager::SELECT,
+				'default'              => 'always',
+				'tablet_default'       => 'always',
+				'mobile_default'       => 'always',
+				'options'              => [
 					'always'   => esc_html__( 'Always Visible', 'wp-social-reels-pro' ),
 					'on_hover' => esc_html__( 'On Hover', 'wp-social-reels-pro' ),
 				],
-				'prefix_class' => 'wpsr-arrows-vis%s-',
-				'condition'    => [
+				'prefix_class'         => 'wpsr-arrows-vis%s-',
+				'selectors_dictionary' => [
+					'always'   => 'opacity: 1 !important; visibility: visible !important; pointer-events: auto !important;',
+					'on_hover' => 'opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;',
+				],
+				'selectors'            => [
+					'{{WRAPPER}} .wpsr-nav-arrow' => '{{VALUE}}',
+					'{{WRAPPER}}:hover .wpsr-nav-arrow' => 'opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; transform: translateY(-50%) translateX(0) !important;',
+					'{{WRAPPER}} .wpsr-carousel-container:hover .wpsr-nav-arrow' => 'opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; transform: translateY(-50%) translateX(0) !important;',
+					'{{WRAPPER}} .wpsr-reels-wrapper:hover .wpsr-nav-arrow' => 'opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; transform: translateY(-50%) translateX(0) !important;',
+				],
+				'condition'            => [
 					'layout_type'     => 'carousel',
 					'carousel_arrows' => 'yes',
 				],
