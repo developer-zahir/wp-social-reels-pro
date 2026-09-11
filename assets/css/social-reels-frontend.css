@@ -611,7 +611,11 @@
 .wpsr-arrows-vis-tablet-on_hover .wpsr-nav-arrow,
 .wpsr-arrows-vis-mobile-on_hover .wpsr-nav-arrow,
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover .wpsr-nav-arrow,
-.wpsr-reels-wrapper[data-arrows-vis="on_hover"] .wpsr-nav-arrow {
+.wpsr-reels-wrapper[data-arrows-vis="on_hover"] .wpsr-nav-arrow,
+.wpsr-carousel-container.wpsr-arrows-vis-on_hover .wpsr-nav-arrow,
+.wpsr-carousel-container[data-arrows-vis="on_hover"] .wpsr-nav-arrow,
+[class*="wpsr-arrows-vis-on_hover"] .wpsr-nav-arrow,
+[data-arrows-vis="on_hover"] .wpsr-nav-arrow {
 	opacity: 0 !important;
 	visibility: hidden !important;
 	pointer-events: none !important;
@@ -627,7 +631,11 @@
 .wpsr-arrows-vis-tablet-on_hover .wpsr-nav-arrow.wpsr-nav-prev,
 .wpsr-arrows-vis-mobile-on_hover .wpsr-nav-arrow.wpsr-nav-prev,
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-prev,
-.wpsr-reels-wrapper[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-prev {
+.wpsr-reels-wrapper[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-prev,
+.wpsr-carousel-container.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-prev,
+.wpsr-carousel-container[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-prev,
+[class*="wpsr-arrows-vis-on_hover"] .wpsr-nav-arrow.wpsr-nav-prev,
+[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-prev {
 	transform: translateY(-50%) translateX(-8px) !important;
 }
 
@@ -635,21 +643,24 @@
 .wpsr-arrows-vis-tablet-on_hover .wpsr-nav-arrow.wpsr-nav-next,
 .wpsr-arrows-vis-mobile-on_hover .wpsr-nav-arrow.wpsr-nav-next,
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-next,
-.wpsr-reels-wrapper[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-next {
+.wpsr-reels-wrapper[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-next,
+.wpsr-carousel-container.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-next,
+.wpsr-carousel-container[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-next,
+[class*="wpsr-arrows-vis-on_hover"] .wpsr-nav-arrow.wpsr-nav-next,
+[data-arrows-vis="on_hover"] .wpsr-nav-arrow.wpsr-nav-next {
 	transform: translateY(-50%) translateX(8px) !important;
 }
 
-/* Hover Revealed State */
+/* Hover Revealed State - Strictly on hover of container/wrapper */
 .wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow,
-.wpsr-arrows-vis-on_hover:focus-within .wpsr-nav-arrow,
 .wpsr-arrows-vis-tablet-on_hover:hover .wpsr-nav-arrow,
-.wpsr-arrows-vis-tablet-on_hover:focus-within .wpsr-nav-arrow,
 .wpsr-arrows-vis-mobile-on_hover:hover .wpsr-nav-arrow,
-.wpsr-arrows-vis-mobile-on_hover:focus-within .wpsr-nav-arrow,
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow,
-.wpsr-reels-wrapper.wpsr-arrows-vis-on_hover:focus-within .wpsr-nav-arrow,
 .wpsr-reels-wrapper[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow,
-.wpsr-reels-wrapper[data-arrows-vis="on_hover"]:focus-within .wpsr-nav-arrow {
+.wpsr-carousel-container.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow,
+.wpsr-carousel-container[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow,
+[class*="wpsr-arrows-vis-on_hover"]:hover .wpsr-nav-arrow,
+[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow {
 	opacity: 1 !important;
 	visibility: visible !important;
 	pointer-events: auto !important;
@@ -662,7 +673,15 @@
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow.swiper-button-disabled,
 .wpsr-reels-wrapper.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow:disabled,
 .wpsr-reels-wrapper[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow.swiper-button-disabled,
-.wpsr-reels-wrapper[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow:disabled {
+.wpsr-reels-wrapper[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow:disabled,
+.wpsr-carousel-container.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow.swiper-button-disabled,
+.wpsr-carousel-container.wpsr-arrows-vis-on_hover:hover .wpsr-nav-arrow:disabled,
+.wpsr-carousel-container[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow.swiper-button-disabled,
+.wpsr-carousel-container[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow:disabled,
+[class*="wpsr-arrows-vis-on_hover"]:hover .wpsr-nav-arrow.swiper-button-disabled,
+[class*="wpsr-arrows-vis-on_hover"]:hover .wpsr-nav-arrow:disabled,
+[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow.swiper-button-disabled,
+[data-arrows-vis="on_hover"]:hover .wpsr-nav-arrow:disabled {
 	opacity: 0.25 !important;
 	cursor: not-allowed !important;
 	pointer-events: none !important;

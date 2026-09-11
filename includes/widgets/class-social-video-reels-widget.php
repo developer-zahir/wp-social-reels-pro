@@ -2288,7 +2288,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		?>
 		<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
 			<?php if ( $is_carousel ) : ?>
-				<div class="swiper wpsr-carousel-container">
+				<div class="swiper wpsr-carousel-container wpsr-arrows-vis-<?php echo esc_attr( $arrows_visibility ); ?>" data-arrows-vis="<?php echo esc_attr( $arrows_visibility ); ?>">
 					<div class="swiper-wrapper">
 						<?php foreach ( $settings['reels_list'] as $index => $item ) : ?>
 							<div class="swiper-slide wpsr-slide-item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
