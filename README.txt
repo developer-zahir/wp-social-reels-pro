@@ -4,7 +4,7 @@ Tags: elementor, reels, video, tiktok, instagram, shorts, video gallery, popup v
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.8.6
+Stable tag: 1.8.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,11 @@ WP Social Reels Pro is a high-performance Elementor addon for showcasing vertica
 5. Customize items, layouts, and styles from the Elementor sidebar!
 
 == Changelog ==
+
+= 1.8.7 =
+* Fix: Completely eliminated static post-CSS selector conflicts causing On Hover navigation arrows not to reveal on hover on the front-end.
+* Enhancement: Replaced static Elementor selector overrides with dynamic `:not(:hover):not(.wpsr-is-hovered)` rules and JavaScript hover state helpers.
+* Optimization: Ensured 100% reliable smooth slide-in and slide-out arrow animations on frontend across all browsers.
 
 = 1.8.6 =
 * Feature: Renamed control to "Page Link" and wrapped profile details (avatar, name, handle) with clickable anchor linking to the page URL on both Reel Cards and Modal Player.

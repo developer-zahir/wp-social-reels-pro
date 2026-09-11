@@ -647,24 +647,17 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$this->add_responsive_control(
 			'carousel_arrows_visibility',
 			[
-				'label'                => esc_html__( 'Arrow Visibility', 'wp-social-reels-pro' ),
-				'type'                 => Controls_Manager::SELECT,
-				'default'              => 'always',
-				'tablet_default'       => 'always',
-				'mobile_default'       => 'always',
-				'options'              => [
+				'label'          => esc_html__( 'Arrow Visibility', 'wp-social-reels-pro' ),
+				'type'           => Controls_Manager::SELECT,
+				'default'        => 'always',
+				'tablet_default' => 'always',
+				'mobile_default' => 'always',
+				'options'        => [
 					'always'   => esc_html__( 'Always Visible', 'wp-social-reels-pro' ),
 					'on_hover' => esc_html__( 'On Hover', 'wp-social-reels-pro' ),
 				],
-				'prefix_class'         => 'wpsr-arrows-vis%s-',
-				'selectors_dictionary' => [
-					'always'   => 'opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; transform: translateY(-50%) translateX(0) !important;',
-					'on_hover' => 'opacity: 0 !important; visibility: hidden !important; pointer-events: none !important;',
-				],
-				'selectors'            => [
-					'{{WRAPPER}} .wpsr-nav-arrow' => '{{VALUE}}',
-				],
-				'condition'            => [
+				'prefix_class'   => 'wpsr-arrows-vis%s-',
+				'condition'      => [
 					'layout_type'     => 'carousel',
 					'carousel_arrows' => 'yes',
 				],
@@ -2310,8 +2303,9 @@ class Social_Video_Reels_Widget extends Widget_Base {
 			<?php if ( $is_carousel ) : ?>
 				<?php if ( $is_hover_mode ) : ?>
 					<style>
-						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-nav-arrow,
-						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-arrow-on-hover {
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow,
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>:not(:hover):not(.wpsr-is-hovered) .wpsr-arrow-on-hover,
+						.elementor-element-<?php echo esc_attr( $widget_id ); ?>:not(:hover):not(.wpsr-is-hovered) .wpsr-nav-arrow {
 							opacity: 0 !important;
 							visibility: hidden !important;
 							pointer-events: none !important;
@@ -2326,10 +2320,11 @@ class Social_Video_Reels_Widget extends Widget_Base {
 							transform: translateY(-50%) translateX(8px) !important;
 						}
 						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>:hover .wpsr-nav-arrow,
-						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>:hover .wpsr-arrow-on-hover,
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?>.wpsr-is-hovered .wpsr-nav-arrow,
 						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-carousel-container:hover .wpsr-nav-arrow,
-						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-carousel-container:hover .wpsr-arrow-on-hover,
-						.elementor-element-<?php echo esc_attr( $widget_id ); ?>:hover .wpsr-nav-arrow {
+						#wpsr-reels-<?php echo esc_attr( $widget_id ); ?> .wpsr-carousel-container.wpsr-is-hovered .wpsr-nav-arrow,
+						.elementor-element-<?php echo esc_attr( $widget_id ); ?>:hover .wpsr-nav-arrow,
+						.elementor-element-<?php echo esc_attr( $widget_id ); ?>.wpsr-is-hovered .wpsr-nav-arrow {
 							opacity: 1 !important;
 							visibility: visible !important;
 							pointer-events: auto !important;
@@ -2344,6 +2339,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 							opacity: 0.25 !important;
 							cursor: not-allowed !important;
 							pointer-events: none !important;
+							transform: translateY(-50%) translateX(0) !important;
 						}
 					</style>
 				<?php endif; ?>

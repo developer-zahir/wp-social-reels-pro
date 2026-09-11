@@ -168,6 +168,13 @@
 					}
 				});
 			}
+
+			// Robust hover state handlers for smooth arrow entrance/exit
+			$wrapper.off('mouseenter.wpsr_hover mouseleave.wpsr_hover').on('mouseenter.wpsr_hover', function () {
+				$(this).addClass('wpsr-is-hovered');
+			}).on('mouseleave.wpsr_hover', function () {
+				$(this).removeClass('wpsr-is-hovered');
+			});
 		},
 
 		/**
