@@ -612,10 +612,11 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$this->add_control(
 			'carousel_loop',
 			[
-				'label'        => esc_html__( 'Infinite Loop', 'wp-social-reels-pro' ),
+				'label'        => esc_html__( 'Enable Slider Loop', 'wp-social-reels-pro' ),
+				'description'  => esc_html__( 'Continuous infinite looping. When disabled, slider stops at the last item while previous back navigation remains active.', 'wp-social-reels-pro' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'wp-social-reels-pro' ),
-				'label_off'    => esc_html__( 'No', 'wp-social-reels-pro' ),
+				'label_on'     => esc_html__( 'Enable', 'wp-social-reels-pro' ),
+				'label_off'    => esc_html__( 'Disable', 'wp-social-reels-pro' ),
 				'return_value' => 'yes',
 				'default'      => 'yes',
 			]

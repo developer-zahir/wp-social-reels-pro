@@ -4,7 +4,7 @@ Tags: elementor, reels, video, tiktok, instagram, shorts, video gallery, popup v
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.7.4
+Stable tag: 1.7.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,12 @@ WP Social Reels Pro is a high-performance Elementor addon for showcasing vertica
 5. Customize items, layouts, and styles from the Elementor sidebar!
 
 == Changelog ==
+
+= 1.7.5 =
+* Feature: Configurable "Enable Slider Loop" switcher option with clear Enable/Disable modes.
+* Feature: Forward navigation loops seamlessly when enabled; stops at the final slide when disabled while maintaining complete Previous/Back navigation.
+* Enhancement: Configured Swiper autoplay stopOnLastSlide when loop is disabled.
+* Fix: Refined navigation arrow disabled states with clear visual feedback (25% opacity and disabled cursor).
 
 = 1.7.4 =
 * Fix: Fixed video poster fallback overlay stacking order to ensure playing videos are never covered by poster thumbnails.

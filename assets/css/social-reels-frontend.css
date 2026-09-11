@@ -597,8 +597,10 @@
 	transform: translateY(-50%);
 }
 
-.wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow.swiper-button-disabled {
-	opacity: 0 !important;
+.wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow.swiper-button-disabled,
+.wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow:disabled {
+	opacity: 0.25 !important;
+	cursor: not-allowed !important;
 	pointer-events: none !important;
 }
 

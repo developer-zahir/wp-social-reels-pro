@@ -83,8 +83,8 @@
 			const spaceBetweenTablet = config.spaceBetweenTablet !== undefined ? config.spaceBetweenTablet : 16;
 			const spaceBetweenMobile = config.spaceBetweenMobile !== undefined ? config.spaceBetweenMobile : 12;
 
-			const isAutoplay = config.autoplay !== false && config.autoplay !== undefined ? !!config.autoplay : true;
-			const isLoop = config.loop !== false;
+			const isAutoplay = (config.autoplay === true || config.autoplay === 'yes');
+			const isLoop = (config.loop === true || config.loop === 'yes');
 
 			const swiperOptions = {
 				slidesPerView: spvMobile,
@@ -132,6 +132,7 @@
 					delay: config.autoplaySpeed ? parseInt(config.autoplaySpeed, 10) : 3500,
 					disableOnInteraction: false,
 					pauseOnMouseEnter: true,
+					stopOnLastSlide: !isLoop,
 				};
 			}
 
