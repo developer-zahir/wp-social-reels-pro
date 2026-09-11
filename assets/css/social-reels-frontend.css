@@ -351,6 +351,20 @@
 	transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
+.wpsr-profile-link {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	min-width: 0;
+	text-decoration: none !important;
+	color: inherit !important;
+	cursor: pointer;
+}
+
+.wpsr-profile-link:hover .wpsr-profile-name {
+	text-decoration: underline;
+}
+
 /* Visibility: Show on Hover Option */
 .wpsr-profile-vis-on_hover .wpsr-profile-info {
 	opacity: 0 !important;
@@ -557,7 +571,12 @@
 	justify-content: center;
 	cursor: pointer;
 	z-index: 35;
-	transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+	transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+	            transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+	            visibility 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+	            background-color 0.25s ease,
+	            color 0.25s ease,
+	            box-shadow 0.25s ease !important;
 	outline: none;
 	border: none;
 	padding: 0;
@@ -594,7 +613,7 @@
 }
 
 .wpsr-reels-wrapper .wpsr-carousel-container .wpsr-nav-arrow:hover {
-	transform: translateY(-50%);
+	transform: translateY(-50%) translateX(0);
 }
 
 /* Base Disabled State (Only applies when NOT in on_hover mode) */
@@ -928,11 +947,19 @@ body div#wpsr-global-modal .wpsr-modal-next {
 	gap: 12px;
 }
 
-.wpsr-modal-profile {
+.wpsr-modal-profile,
+a.wpsr-modal-profile {
 	display: flex;
 	align-items: center;
 	gap: 9px;
 	min-width: 0;
+	text-decoration: none !important;
+	color: inherit !important;
+	cursor: pointer;
+}
+
+a.wpsr-modal-profile:hover .wpsr-modal-name {
+	text-decoration: underline;
 }
 
 .wpsr-modal-avatar {

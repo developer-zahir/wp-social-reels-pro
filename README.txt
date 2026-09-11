@@ -4,7 +4,7 @@ Tags: elementor, reels, video, tiktok, instagram, shorts, video gallery, popup v
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.8.5
+Stable tag: 1.8.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,10 +41,14 @@ WP Social Reels Pro is a high-performance Elementor addon for showcasing vertica
 
 == Changelog ==
 
-= 1.7.8 =
-* Fix: Completely resolved On Hover visibility bug so navigation arrows remain hidden initially until hovered.
-* Enhancement: Refined 8px offset smooth slide-in and slide-out entrance animation for left and right navigation arrows.
-* Optimization: Added Elementor responsive prefix_class and data-arrows-vis attributes for real-time reactivity.
+= 1.8.6 =
+* Feature: Renamed control to "Page Link" and wrapped profile details (avatar, name, handle) with clickable anchor linking to the page URL on both Reel Cards and Modal Player.
+* Enhancement: Optimized Navigation Arrow On Hover entrance animation with smooth 8px offset slide-in (`translateX(-8px)` to `translateX(0)` for Prev, `translateX(8px)` to `translateX(0)` for Next).
+* Fix: Synchronized CSS transitions and Elementor responsive control selectors to ensure smooth slide-in hover animation across desktop, tablet, and mobile.
+
+= 1.8.5 =
+* Feature: Auto-update checker via Plugin Update Checker (PUC v5) with GitHub releases.
+* Enhancement: Added GitHub release packaging and automated update notifications.
 
 = 1.7.7 =
 * Feature: Added Navigation Arrow Visibility control with "Always Visible" and "On Hover" modes.

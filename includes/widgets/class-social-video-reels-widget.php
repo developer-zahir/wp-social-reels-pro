@@ -141,7 +141,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$this->add_control(
 			'global_profile_url',
 			[
-				'label'       => esc_html__( 'Social Profile / Post URL', 'wp-social-reels-pro' ),
+				'label'       => esc_html__( 'Page Link', 'wp-social-reels-pro' ),
 				'type'        => Controls_Manager::URL,
 				'placeholder' => 'https://instagram.com/yourpage',
 				'default'     => [
@@ -663,9 +663,6 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				],
 				'selectors'            => [
 					'{{WRAPPER}} .wpsr-nav-arrow' => '{{VALUE}}',
-					'{{WRAPPER}}.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-prev, {{WRAPPER}} .wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-prev, {{WRAPPER}} .wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-prev, {{WRAPPER}} .wpsr-nav-prev.wpsr-arrow-on-hover' => 'transform: translateY(-50%) translateX(-6px) !important;',
-					'{{WRAPPER}}.wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-next, {{WRAPPER}} .wpsr-arrows-vis-on_hover .wpsr-nav-arrow.wpsr-nav-next, {{WRAPPER}} .wpsr-arrows-on-hover .wpsr-nav-arrow.wpsr-nav-next, {{WRAPPER}} .wpsr-nav-next.wpsr-arrow-on-hover' => 'transform: translateY(-50%) translateX(6px) !important;',
-					'{{WRAPPER}}:hover .wpsr-nav-arrow, {{WRAPPER}} .wpsr-carousel-container:hover .wpsr-nav-arrow, {{WRAPPER}} .wpsr-reels-wrapper:hover .wpsr-nav-arrow' => 'opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; transform: translateY(-50%) translateX(0) !important;',
 				],
 				'condition'            => [
 					'layout_type'     => 'carousel',
@@ -2410,6 +2407,12 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$profile_handle      = ! empty( $settings['global_profile_handle'] ) ? $settings['global_profile_handle'] : 'timecliq.watches';
 		$profile_visibility  = ! empty( $settings['profile_info_visibility'] ) ? $settings['profile_info_visibility'] : 'always';
 
+		// Resolve Page Link for Profile Info Area
+		$page_link_url    = ! empty( $settings['global_profile_url']['url'] ) ? $settings['global_profile_url']['url'] : '';
+		$page_link_target = ( isset( $settings['global_profile_url']['is_external'] ) && ! $settings['global_profile_url']['is_external'] ) ? '_self' : '_blank';
+		$page_link_rel    = 'noopener noreferrer' . ( ! empty( $settings['global_profile_url']['nofollow'] ) ? ' nofollow' : '' );
+		$has_page_link    = ( ! empty( $page_link_url ) && '#' !== $page_link_url );
+
 		// Resolve Specific Video Post URL (Repeater item first, fallback to Global Profile URL)
 		$post_link_url = '#';
 		$post_target   = '_blank';
@@ -2505,17 +2508,23 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				<div class="wpsr-card-top-bar">
 					<?php if ( $show_card_profile ) : ?>
 						<div class="wpsr-profile-info">
-							<?php if ( ! empty( $avatar_url ) ) : ?>
-								<img class="wpsr-avatar" src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $profile_name ); ?>" loading="lazy" />
-							<?php else : ?>
-								<div class="wpsr-avatar wpsr-avatar-placeholder"><i class="fas fa-user"></i></div>
+							<?php if ( $has_page_link ) : ?>
+								<a href="<?php echo esc_url( $page_link_url ); ?>" class="wpsr-profile-link" target="<?php echo esc_attr( $page_link_target ); ?>" rel="<?php echo esc_attr( $page_link_rel ); ?>" onclick="event.stopPropagation();" aria-label="<?php echo esc_attr( $profile_name ); ?>">
 							<?php endif; ?>
-							<div class="wpsr-profile-meta">
-								<span class="wpsr-profile-name"><?php echo esc_html( $profile_name ); ?></span>
-								<?php if ( ! empty( $profile_handle ) ) : ?>
-									<span class="wpsr-profile-handle"><?php echo esc_html( $profile_handle ); ?></span>
+								<?php if ( ! empty( $avatar_url ) ) : ?>
+									<img class="wpsr-avatar" src="<?php echo esc_url( $avatar_url ); ?>" alt="<?php echo esc_attr( $profile_name ); ?>" loading="lazy" />
+								<?php else : ?>
+									<div class="wpsr-avatar wpsr-avatar-placeholder"><i class="fas fa-user"></i></div>
 								<?php endif; ?>
-							</div>
+								<div class="wpsr-profile-meta">
+									<span class="wpsr-profile-name"><?php echo esc_html( $profile_name ); ?></span>
+									<?php if ( ! empty( $profile_handle ) ) : ?>
+										<span class="wpsr-profile-handle"><?php echo esc_html( $profile_handle ); ?></span>
+									<?php endif; ?>
+								</div>
+							<?php if ( $has_page_link ) : ?>
+								</a>
+							<?php endif; ?>
 						</div>
 					<?php else : ?>
 						<div class="wpsr-profile-info-empty"></div>

@@ -216,8 +216,8 @@
 				if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') {
 					return;
 				}
-				// If clicked on "View post", social icon link, or nav arrow, don't trigger modal/play
-				if ($(e.target).closest('.wpsr-view-post-link, .wpsr-social-icon-link, .wpsr-nav-arrow').length) {
+				// If clicked on "View post", social icon link, nav arrow, or profile link, don't trigger modal/play
+				if ($(e.target).closest('.wpsr-view-post-link, .wpsr-social-icon-link, .wpsr-nav-arrow, .wpsr-profile-link, .wpsr-profile-info a, .wpsr-modal-profile').length) {
 					return;
 				}
 
@@ -322,13 +322,13 @@
 					<div class="wpsr-modal-video-card">
 						<!-- Top Overlay Header inside Modal -->
 						<div class="wpsr-modal-top-bar">
-							<div class="wpsr-modal-profile">
+							<a href="#" class="wpsr-modal-profile wpsr-modal-profile-link" target="_blank" rel="noopener noreferrer">
 								<img class="wpsr-modal-avatar" src="" alt="" />
 								<div class="wpsr-modal-profile-meta">
 									<span class="wpsr-modal-name"></span>
 									<span class="wpsr-modal-handle"></span>
 								</div>
-							</div>
+							</a>
 							<a href="#" class="wpsr-modal-view-post" target="_blank" rel="noopener noreferrer">
 								<span class="wpsr-modal-view-text">View post</span>
 							</a>
@@ -478,6 +478,7 @@
 
 			// Populate Profile Info (Strictly adhering to visibility settings)
 			const profileVis = this.activeWrapper ? this.activeWrapper.attr('data-profile-vis') : 'always';
+			const globalUrl = this.activeWrapper ? this.activeWrapper.attr('data-global-url') : '';
 			if (profileVis === 'card_only' || profileVis === 'none') {
 				$modal.find('.wpsr-modal-profile').hide();
 			} else {
@@ -488,6 +489,11 @@
 					$modal.find('.wpsr-modal-avatar').attr('src', avatarSrc).show();
 				} else {
 					$modal.find('.wpsr-modal-avatar').hide();
+				}
+				if (globalUrl && globalUrl !== '#' && globalUrl.trim() !== '') {
+					$modal.find('.wpsr-modal-profile').attr('href', globalUrl).css('pointer-events', 'auto');
+				} else {
+					$modal.find('.wpsr-modal-profile').attr('href', '#').css('pointer-events', 'none');
 				}
 			}
 
