@@ -647,16 +647,17 @@ class Social_Video_Reels_Widget extends Widget_Base {
 		$this->add_responsive_control(
 			'carousel_arrows_visibility',
 			[
-				'label'     => esc_html__( 'Arrow Visibility', 'wp-social-reels-pro' ),
-				'type'      => Controls_Manager::SELECT,
-				'default'   => 'always',
+				'label'        => esc_html__( 'Arrow Visibility', 'wp-social-reels-pro' ),
+				'type'         => Controls_Manager::SELECT,
+				'default'      => 'always',
 				'tablet_default' => 'always',
 				'mobile_default' => 'always',
-				'options'   => [
+				'options'      => [
 					'always'   => esc_html__( 'Always Visible', 'wp-social-reels-pro' ),
 					'on_hover' => esc_html__( 'On Hover', 'wp-social-reels-pro' ),
 				],
-				'condition' => [
+				'prefix_class' => 'wpsr-arrows-vis%s-',
+				'condition'    => [
 					'layout_type'     => 'carousel',
 					'carousel_arrows' => 'yes',
 				],
@@ -1985,7 +1986,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 					'size' => 50,
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .wpsr-nav-arrow' => 'top: {{SIZE}}{{UNIT}} !important; transform: translateY(-50%) !important;',
+					'{{WRAPPER}} .wpsr-nav-arrow' => 'top: {{SIZE}}{{UNIT}} !important;',
 				],
 			]
 		);
@@ -2276,6 +2277,7 @@ class Social_Video_Reels_Widget extends Widget_Base {
 				'data-global-handle'     => $global_handle,
 				'data-global-url'        => $global_profile_url,
 				'data-profile-vis'       => esc_attr( $profile_visibility ),
+				'data-arrows-vis'        => esc_attr( $arrows_visibility ),
 				'data-show-stats'        => $show_engagement_stats ? 'true' : 'false',
 				'data-show-caption'      => $show_caption ? 'true' : 'false',
 				'data-view-display'      => esc_attr( $view_post_display ),
